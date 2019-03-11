@@ -1,0 +1,74 @@
+﻿@model MyPass.Entities.Item
+
+@{
+    ViewBag.Title = "Madde Ekle";
+}
+
+<div class="">
+    <div class="card shadow">
+        <h5 class="card-header">@ViewBag.Title</h5>
+        <div class="card-body">
+            @using (Ajax.BeginForm("SaveItem", "Item", new AjaxOptions
+            {
+
+                HttpMethod = "POST",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "item-list",
+                OnSuccess = "successAjax",
+
+            }, new { autocomplete = "off", id = "create-item-form" }))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Title)
+                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Description)
+                    @Html.TextAreaFor(model => model.Description, 8, 0, new { @class = "form-control", style = "width: 100%;" })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Password)
+                    @Html.PasswordFor(model => model.Password, new { @class = "form-control", autocomplete = "new-password" })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.HiddenFor(model => model.GroupId)
+                </div>
+
+                <div class="form-group">
+                    @Html.HiddenFor(model => model.ItemTypeId)
+                </div>
+
+                <div class="form-group float-right pl-2">
+                    <input type="submit" value="Kaydet" class="btn btn-success" />
+                </div>
+
+                <div class="form-group float-right">
+                    <input type="button" value="İptal" class="btn btn-danger" onclick="return $('#item').html('');" />
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    (function () {
+        var some_id = document.getElementById('some_id');
+        some_id.type = 'text';
+        some_id.removeAttribute('autocomplete');
+    })();
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

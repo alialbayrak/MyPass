@@ -1,0 +1,46 @@
+﻿@model MyPass.Entities.Item
+
+@{
+    ViewBag.Title = "Madde Detayı";
+}
+<div class="container">
+    <div class="card shadow">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6 pt-2">
+                    <h5>@ViewBag.Title</h5>
+                </div>
+                <div class="col-md-6 text-right">
+                    <span>@Html.ActionLink("Düzenle", "Edit", new { id = Model.Id }, new { @class = "btn btn-info" })</span>
+                    <span>@Html.ActionLink("Listeye Geri Dön", "List", null, new { @class = "btn btn-warning" })</span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+        <div class="card-body">
+            <dl class="dl-horizontal">
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Title)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Title)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+
+                <dd>
+                    <p>@Html.TextAreaFor(model => model.Description, 10, 0, new { @class = "form-control", disabled = "", style = "background-color: #fff" })</p>
+                </dd>
+
+            </dl>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,61 @@
+﻿@model MyPass.Entities.Item
+
+@{
+    ViewBag.Title = "Madde Düzenle";
+}
+<div class="container">
+    <div class="card shadow">
+        <h5 class="card-header">
+            @ViewBag.Title
+        </h5>
+        <div class="card-body">
+            @using (Html.BeginForm("Edit", "Item", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.Id)
+                @Html.HiddenFor(model => model.Status)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label " })
+                    @Html.TextAreaFor(model => model.Description, 8, 0, new { @class = "form-control", style = "width: 100%;" })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label " })
+                    <input name="Password" type="password" value="@Model.Password" class="form-control" />
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+
+                @Html.HiddenFor(m => m.GroupId)
+                @Html.HiddenFor(m => m.ItemTypeId)
+
+                <div class="form-group text-right">
+
+                    <div class="float-right">
+                        <input type="submit" value="Kaydet" class="btn btn-success" />
+                    </div>
+                    <div class="float-right mr-2">
+                        <input type="button" value="İptal" class="btn btn-danger" onclick="goBack(@Model.GroupId)" />
+                    </div>
+                </div>
+
+
+            }
+        </div>
+    </div>
+
+</div>
+<script>
+    function goBack(id) {
+        location.href = "/Group/Details/" + id;
+    }
+</script>

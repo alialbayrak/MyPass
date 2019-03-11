@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Yönlendirme";
+}
+
+@{
+    if (ViewBag.Status != null && ViewBag.Status == "Error")
+    {
+        <div class="container mt-5 bg-danger shadow rounded">
+            <div class="jumbotron bg-danger text-white ">
+                <h1 class="display-4">@ViewBag.Caption</h1>
+                <hr class="my-4">
+                <p class="lead">@ViewBag.Message</p>
+                <div class="float-sm-right loading">Yönlendiriliyorsunuz</div><br>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="container mt-5 bg-success shadow rounded">
+            <div class="jumbotron bg-success text-white ">
+                <h1 class="display-4">@ViewBag.Caption</h1>
+                <hr class="my-4">
+                <p class="lead">@ViewBag.Message</p>
+                <div class="float-sm-right loading">Yönlendiriliyorsunuz</div><br>
+            </div>
+        </div>
+    }
+}
+
+<script>
+    setTimeout(function () {
+        window.location.href = window.location.origin.toString() + "@Url.Action(ViewBag.Action, ViewBag.Contoller)";
+    }, 5000);
+</script>
+

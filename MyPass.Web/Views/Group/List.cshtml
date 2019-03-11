@@ -1,0 +1,68 @@
+﻿@model IEnumerable<MyPass.Entities.Group>
+
+@{
+    ViewBag.Title = "Gruplar";
+}
+<div class="card shadow">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-6 mt-2">
+                <h5>@ViewBag.Title</h5>
+            </div>
+            <div class="col-md-6 text-right">
+                <span>
+                    @Html.ActionLink("Grup Ekle", "Create", null, new { @class = "btn btn-primary" })
+                </span>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AddedDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UpdatedDate)
+                </th>
+                <th></th>
+            </tr>
+            @foreach (var group in Model)
+            {
+                if (group.Description != null && group.Description.Length > 120)
+                {
+                    group.Description = group.Description.Substring(0, 120) + "...";
+                }
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => group.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => group.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => group.AddedDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => group.UpdatedDate)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Detaylar", "Details", new { id = group.Id }, new { @class = "btn btn-info btn-sm" }) |
+                        @Html.ActionLink("Sil", "Delete", new { id = group.Id }, new { @class = "btn btn-danger btn-sm px-4", onClick = "return confirm('Grubu silmek istediğinize emin misiniz?')" })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+
+

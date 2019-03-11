@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Error</title>
+</head>
+<body>
+    <hgroup>
+        <h1>@ViewBag.Caption</h1>
+        <h2>@ViewBag.Message</h2>
+    </hgroup>
+
+
+    <script>
+        setTimeout(function () {
+            window.location.href = window.location.origin.toString() + "@Url.Action("Login","User")";
+        },5000);
+    </script>
+</body>
+</html>
