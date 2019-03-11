@@ -49,7 +49,7 @@
     window.onload = function () {
         $.getJSON('https://api.ipify.org?format=json', function (data) {
             var elem = document.getElementById("ip");
-            elem.innerText = "İp Adresi:" + data.ip;
+            elem.innerText = "İp Adresiniz:" + data.ip;
         });
     };
     
