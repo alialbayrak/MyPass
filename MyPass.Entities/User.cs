@@ -9,7 +9,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MyPass.Entities
 {
-    [Table("Users")]
     public class User : EntityBase
     {
         [Required, StringLength(25)]

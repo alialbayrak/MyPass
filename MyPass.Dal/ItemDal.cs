@@ -11,7 +11,7 @@ namespace MyPass.Dal
 {
     public class ItemDal : IDalBase<Item>
     {
-        new MyPassContext db = new MyPassContext();
+        MyPassContext db = new MyPassContext();
 
         public int Add(Item model)
         {
@@ -51,8 +51,8 @@ namespace MyPass.Dal
 
         public int GetTotalItemCountByUserId(int userId)
         {
-            return db.Items.Join(db.Groups,item => item.GroupId, group => group.Id, (item, group) => new { item, group })
-                .Where(m => m.group.UserId == userId && m.group.Status == true && m.item.Status == true).ToList().Count();
+            return 0;// db.Items.Join(db.Groups,item => item.GroupId, group => group.Id, (item, group) => new { item, group })
+             //   .Where(m => m.group.UserId == userId && m.group.Status == true && m.item.Status == true).ToList().Count();
         }
 
     }

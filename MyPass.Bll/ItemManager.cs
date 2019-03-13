@@ -11,7 +11,7 @@ namespace MyPass.Bll
 {
     public class ItemManager
     {
-        private ItemDal _dal = new ItemDal();
+        ItemDal _dal = new ItemDal();
 
         public Item FindItem(int itemId, int userId)
         {

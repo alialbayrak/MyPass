@@ -1,4 +1,4 @@
-﻿@model MyPass.Entities.Group
+﻿@model MyPass.Entities.ViewModel.GroupDetailViewModel
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.2/css/bootstrap.css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
@@ -14,7 +14,7 @@
                 <h5>@ViewBag.Title</h5>
             </div>
             <div>
-                <span>@Html.ActionLink("Düzenle", "Edit", new { id = Model.Id }, new { @class = "btn btn-info" })</span>
+                <span>@Html.ActionLink("Düzenle", "Edit", new { id = Model.Group.Id }, new { @class = "btn btn-info" })</span>
                 <span>@Html.ActionLink("Listeye Geri Dön", "List", null, new { @class = "btn btn-warning" })</span>
             </div>
 
@@ -33,19 +33,19 @@
                     <dl class="dl-horizontal">
 
                         <dt>
-                            @Html.DisplayNameFor(model => model.Title)
+                            @Html.DisplayNameFor(model => model.Group.Title)
                         </dt>
 
                         <dd>
-                            @Html.DisplayFor(model => model.Title)
+                            @Html.DisplayFor(model => model.Group.Title)
                         </dd>
 
                         <dt>
-                            @Html.DisplayNameFor(model => model.Description)
+                            @Html.DisplayNameFor(model => model.Group.Description)
                         </dt>
 
                         <dd>
-                            <p>@Html.TextAreaFor(model => model.Description, 10, 0, new { @class = "form-control", disabled = "", style = "background-color: #fff" })</p>
+                            <p>@Html.TextAreaFor(model => model.Group.Description, 10, 0, new { @class = "form-control", disabled = "", style = "background-color: #fff" })</p>
                         </dd>
 
                     </dl>
@@ -53,17 +53,35 @@
 
             </div>
 
+            <div class="form-group" id="group-users">
+
+                @Html.Label("Grup Sahibi")
+                <div>
+                    @Model.GroupOwnerName
+                </div>
+
+
+            </div>
+            <hr />
+
+            <div class="form-group" id="group-users">
+
+                @Html.Partial("_GroupUserList", Model.SharedGroupUserList)
+
+            </div>
+
+
             <div class="row mb-3">
 
                 <div class="col-md-12">
-                    @Ajax.ActionLink("Madde Ekle", "Create", "Item", new { id = Model.Id }, new AjaxOptions
-                    {
-                        UpdateTargetId = "item",
-                        InsertionMode = InsertionMode.Replace,
-                        HttpMethod = "POST",
-                        OnSuccess = "toAddDiv"
+                    @Ajax.ActionLink("Madde Ekle", "Create", "Item", new { id = Model.Group.Id }, new AjaxOptions
+            {
+                UpdateTargetId = "item",
+                InsertionMode = InsertionMode.Replace,
+                HttpMethod = "POST",
+                OnSuccess = "toAddDiv"
 
-                    }, new { @class = "btn btn-success btn-block" })
+            }, new { @class = "btn btn-success btn-block" })
                 </div>
 
             </div>
@@ -80,7 +98,7 @@
 
         </div>
         <div id="item-list" class="card-footer">
-            @Html.Partial("_GroupItemList", Model)
+            @Html.Partial("_GroupItemList", Model.Group)
         </div>
     </div>
 </div>
@@ -114,6 +132,22 @@
 
     function toAddDiv() {
         document.getElementById("item").scrollIntoView({ block: "center", behavior: "smooth" });
+    }
+
+    function UnShare(userId) {
+        if (confirm('kullanıcıyı silmek istediğinize emin misiniz?')) {
+            let groupId = @Model.Group.Id;
+
+            $.ajax({
+                method: "POST",
+                url: "@Url.Action("UnShare")",
+                data: { "userId": userId, "groupId": groupId },
+                success: function (response) {
+                    $("#group-users").html(response);
+                }
+            });
+
+        }
     }
 </script>
 

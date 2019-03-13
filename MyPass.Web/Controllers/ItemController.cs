@@ -74,19 +74,26 @@ namespace MyPass.Web.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public PartialViewResult SaveItem(Item item)
         {
-            try
+            if (ModelState.IsValid)
             {
-                _bll.AddItem(item);
-                GroupManager groupManager = new GroupManager();
-                var group = new Group();
-                group.Id = item.GroupId;
-                group = groupManager.FillGroupItems(group);
-                return PartialView("~/Views/Group/_GroupItemList.cshtml", group);
+                try
+                {
+                    _bll.AddItem(item);
+                    GroupManager groupManager = new GroupManager();
+                    var group = new Group();
+                    group.Id = item.GroupId;
+                    group = groupManager.FillItems(group);
+                    return PartialView("~/Views/Group/_GroupItemList.cshtml", group);
+                }
+                catch(Exception ex)
+                {
+                    ModelState.AddModelError("",ex.Message);
+                    return PartialView("Create", item);
+                }
             }
-            catch
-            {
-                return PartialView("Create", item);
-            }
+
+            return PartialView("Create", item);
+
         }
 
         public string CopyPassword(int id)

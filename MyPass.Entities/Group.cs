@@ -18,8 +18,10 @@ namespace MyPass.Entities
         [Display(Name = "Açıklama"), DataType(DataType.MultilineText), StringLength(500)]
         public string Description { get; set; }
 
-        public virtual int UserId { get; set; }
+        [Required]
+        public int OwnerUserId { get; set; }
 
         public virtual List<Item> ItemList { get; set; }
+
     }
 }
