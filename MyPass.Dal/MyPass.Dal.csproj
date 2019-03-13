@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Abstract\IDalBase.cs" />
     <Compile Include="GroupDal.cs" />
+    <Compile Include="GroupUserDal.cs" />
     <Compile Include="ItemDal.cs" />
     <Compile Include="MyPassContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

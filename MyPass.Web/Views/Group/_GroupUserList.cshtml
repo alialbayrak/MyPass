@@ -1,0 +1,22 @@
+﻿@model List<MyPass.Entities.User>
+
+@if (Model != null && Model.Count > 0)
+{
+    @Html.Label("Paylaşılan Kullanıcılar")
+    foreach (var user in Model)
+    {
+        <div class="pt-2 pb-2">
+            <div class="d-flex align-items-center">
+                <div class="flex-grow-1">
+                    @user.Email
+                </div>
+                <div class="pr-2">
+                    <button type="button" class="btn btn-outline-danger btn-sm" onclick="UnShare(@user.Id);">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                </div> 
+            </div>
+        </div>
+    }
+    @Html.ValidationMessageFor(m => m, "", new { @class = "text-danger" })
+}

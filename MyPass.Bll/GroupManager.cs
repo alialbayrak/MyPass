@@ -6,33 +6,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MyPass.Bll.Helper;
+using MyPass.Entities.ViewModel;
 
 namespace MyPass.Bll
 {
     public class GroupManager
     {
-        private GroupDal _dal = new GroupDal();
+        GroupDal _dal = new GroupDal();
+
+        public List<Group> FindAll(int userId)
+        {
+            return _dal.GetAll(userId);
+        }
 
         public int AddGroup(Group group)
         {
-            return _dal.Add(group);
+            int groupId = _dal.Add(group);
+
+            return groupId;
         }
 
-        public List<Group> GetAllUserGroups(int userId)
-        {
-            return _dal.GetGroupsByUserId(userId);
-        }
-
-        public Group FindGroup(int groupId, int userId)
+        public Group Find(int groupId, int userId)
         {
             Group group = _dal.GetById(groupId, userId);
-            FillGroupItems(group);
+            FillItems(group);
 
             return group;
-            
+
         }
 
-        public int RemoveGroup(int groupId, int userId)
+        public int Remove(int groupId, int userId)
         {
             int id = 0;
             Group group = _dal.GetById(groupId, userId);
@@ -41,7 +44,7 @@ namespace MyPass.Bll
                 id = _dal.Delete(group);
                 if (id == 0)
                     throw new Exception("Grup silinemedi!");
-                
+
             }
             else
                 throw new Exception("Grup bulunamadı!");
@@ -49,13 +52,13 @@ namespace MyPass.Bll
             return id;
 
         }
-        
-        public int UpdateGroup(Group group)
+
+        public int Update(Group group)
         {
             return _dal.Update(group);
         }
 
-        public Group FillGroupItems(Group group)
+        public Group FillItems(Group group)
         {
             group.ItemList = _dal.GetGroupItems(group.Id);
 
@@ -65,6 +68,68 @@ namespace MyPass.Bll
             }
 
             return group;
+        }
+
+        public void ShareGroup(string email, int groupId, int currentUserId)
+        {
+            UserDal userDal = new UserDal();
+            User user = userDal.GetUserByEmailAdress(email);
+
+            if(user.Id == currentUserId)
+                throw new Exception("Kendinizi ekleyemezsiniz!");
+
+            if (user == null)
+                throw new Exception("Kullanıcı bulunamadı!");
+
+            GroupUser groupUser = new GroupUser{
+                GroupId = groupId,
+                UserId = user.Id
+            };
+            _dal.AddGroupUser(groupUser);
+        }
+
+        public void UnShareGroup(int userId, int groupId, int currentUserId)
+        {
+            UserDal userDal = new UserDal();
+            User user = userDal.GetById(userId);
+
+            if (user == null)
+                throw new Exception("Kullanıcı bulunamadı!");
+
+            GroupUser groupUser = _dal.GetGroupUserByUserIdGroupId(userId, groupId);
+            _dal.DeleteGroupUser(groupUser);
+        }
+
+        public List<User> FindGroupUsers(int groupId)
+        {
+            List<GroupUser> groupUserList = _dal.GetAllGroupUsers(groupId);
+            List<User> UserList = new List<User>();
+            if (groupUserList != null)
+            {
+                UserDal userDal = new UserDal();
+                foreach (var groupUser in groupUserList)
+                {
+                    User user = new User();
+                    user.Id = groupUser.UserId;
+                    user.Email = userDal.GetById(groupUser.UserId).Email;
+
+                    UserList.Add(user);
+                }
+            }
+
+            return UserList;
+
+        }
+
+        public string FindOwnerEmail(int groupId)
+        {
+            Group group = _dal.GetById(groupId);
+
+            UserDal userDal = new UserDal();
+            User user = userDal.GetById(group.OwnerUserId);
+
+            return user.Email;
+
         }
     }
 }

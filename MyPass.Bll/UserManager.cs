@@ -12,7 +12,7 @@ namespace MyPass.Bll
 {
     public class UserManager
     {
-        private UserDal _dal = new UserDal();
+        UserDal _dal = new UserDal();
 
         public int RegisterUser(User user)
         {

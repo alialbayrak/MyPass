@@ -6,13 +6,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MyPass.Web.Filter;
+using MyPass.Entities.ViewModel;
 
 namespace MyPass.Web.Controllers
 {
     [AuthFilter]
     public class GroupController : Controller
     {
-        GroupManager bll = new GroupManager();
+        private GroupManager _bll = new GroupManager();
 
         // GET: Group
         public ActionResult Index()
@@ -22,17 +23,25 @@ namespace MyPass.Web.Controllers
 
         public ActionResult List()
         {
-            List<Group> groups = bll.GetAllUserGroups((Session["User"] as User).Id);
+            List<Group> groups = _bll.FindAll((Session["User"] as User).Id);
             return View(groups);
         }
 
-        #region Details
-        public ActionResult Details(int? id)
+        #region Detail
+        public ActionResult Detail(int? id)
         {
             if (id != null)
             {
-                Group group = bll.FindGroup((int)id, (Session["User"] as User).Id);
-                return View(group);
+                int userId = (Session["User"] as User).Id;
+                Group group = _bll.Find((int)id, userId);
+                List<User> groupUserList = _bll.FindGroupUsers((int)id);
+                GroupDetailViewModel model = new GroupDetailViewModel()
+                {
+                    Group = group,
+                    SharedGroupUserList = groupUserList,
+                    GroupOwnerName = _bll.FindOwnerEmail((int)id)
+                };
+                return View(model);
             }
             else
                 return new HttpStatusCodeResult(400, "Opps");
@@ -41,14 +50,14 @@ namespace MyPass.Web.Controllers
         #endregion
 
         #region Create
-        // GET: Group/Create
+
         public ActionResult Create()
         {
 
             return View(new Group());
         }
 
-        // POST: Group/Create
+
         [HttpPost]
         public ActionResult Create(Group group)
         {
@@ -56,11 +65,15 @@ namespace MyPass.Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    group.UserId = (Session["User"] as User).Id;
-                    bll.AddGroup(group);
-                    (Session["GroupList"] as List<Group>).Add(group);
+                    group.OwnerUserId = (Session["User"] as User).Id;
+                    _bll.AddGroup(group);
+                    if (Session["GroupList"] == null)
+                        Session["GroupList"] = new List<Group>();
 
-                    return RedirectToAction("Details", "Group", new { id = group.Id });
+                    (Session["GroupList"] as List<Group>).Add(group);
+                        
+
+                    return RedirectToAction("Detail", "Group", new { id = group.Id });
                 }
 
                 return View(group);
@@ -80,8 +93,18 @@ namespace MyPass.Web.Controllers
         {
             if (id != null)
             {
-                Group group = bll.FindGroup((int)id, (Session["User"] as User).Id);
-                return View(group);
+                int userId = (Session["User"] as User).Id;
+                Group group = _bll.Find((int)id, userId);
+                List<User> groupUserList = _bll.FindGroupUsers((int)id);
+
+                GroupEditViewModel model = new GroupEditViewModel()
+                {
+                    Group = group,
+                    SharedGroupUserList = groupUserList,
+                    GroupOwnerName = _bll.FindOwnerEmail((int)id)
+                };
+
+                return View(model);
             }
             else
                 return new HttpStatusCodeResult(400, "Opps");
@@ -89,13 +112,14 @@ namespace MyPass.Web.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Edit(Group group)
+        public ActionResult Edit(GroupEditViewModel model)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    bll.UpdateGroup(group);
+                    Group group = model.Group;
+                    _bll.Update(group);
                     return RedirectToAction("Details", new { id = group.Id });
                 }
                 catch (Exception ex)
@@ -104,7 +128,44 @@ namespace MyPass.Web.Controllers
                 }
             }
 
-            return View(group);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Share(string email, int groupId)
+        {
+            List<User> model = new List<User>();
+            try
+            {
+                _bll.ShareGroup(email, groupId, (Session["User"] as User).Id);
+                model = _bll.FindGroupUsers(groupId);
+
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+            }
+
+            return PartialView("_GroupUserList", model);
+
+        }
+
+        [HttpPost]
+        public ActionResult Unshare(int userId, int groupId)
+        {
+            List<User> model = new List<User>();
+            try
+            {
+                _bll.UnShareGroup(userId, groupId, (Session["User"] as User).Id);
+                model = _bll.FindGroupUsers(groupId);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+            }
+
+            return PartialView("_GroupUserList", model);
+
         }
 
         #endregion
@@ -116,8 +177,8 @@ namespace MyPass.Web.Controllers
             {
                 if(id != null)
                 {
-                    bll.RemoveGroup((int)id, (Session["User"] as User).Id);
-                    Session["GroupList"] = bll.GetAllUserGroups((Session["User"] as User).Id);
+                    _bll.Remove((int)id, (Session["User"] as User).Id);
+                    Session["GroupList"] = _bll.FindAll((Session["User"] as User).Id);
                 }
                     
                 else

@@ -13,8 +13,10 @@ namespace MyPass.Dal
         public DbSet<User> Users { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<Item> Items { get; set; }
+        public DbSet<GroupUser> GroupUsers { get; set; }
+
 
     }
 
-    
+
 }

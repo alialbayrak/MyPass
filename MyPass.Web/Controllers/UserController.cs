@@ -12,7 +12,7 @@ namespace MyPass.Web.Controllers
 {
     public class UserController : Controller
     {
-        UserManager _bll = new UserManager();
+        private UserManager _bll = new UserManager();
 
         // GET: User
         public ActionResult Index()
@@ -74,7 +74,7 @@ namespace MyPass.Web.Controllers
                     {
                         Session["User"] = user;
                         GroupManager groupBll = new GroupManager();
-                        Session["GroupList"] = groupBll.GetAllUserGroups(user.Id);
+                        Session["GroupList"] = groupBll.FindAll(user.Id);
                         return RedirectToAction("Index", "Home");
                     }
                 }
