@@ -20,7 +20,8 @@ namespace MyPass.Dal
 
         public int Delete(GroupUser model)
         {
-            throw new NotImplementedException();
+            db.GroupUsers.Remove(model);
+            return db.SaveChanges();
         }
 
         public List<GroupUser> GetAll(int userId)
@@ -31,6 +32,11 @@ namespace MyPass.Dal
         public GroupUser GetById(int id, int userId)
         {
             throw new NotImplementedException();
+        }
+
+        public List<GroupUser> GetByGroupId(int groupId)
+        {
+            return db.GroupUsers.Where(m => m.GroupId == groupId).ToList();
         }
 
         public int Update(GroupUser model)

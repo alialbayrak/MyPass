@@ -186,7 +186,7 @@ namespace MyPass.Web.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch(Exception ex)
             {
                 return View("Index");
             }
