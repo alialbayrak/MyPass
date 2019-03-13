@@ -41,7 +41,19 @@ namespace MyPass.Bll
             Group group = _dal.GetById(groupId, userId);
             if (group != null)
             {
+                GroupUserDal groupUserDal = new GroupUserDal();
+                List<GroupUser> groupUsers = groupUserDal.GetByGroupId(groupId);
+                
                 id = _dal.Delete(group);
+
+                if (groupUsers != null && groupUsers.Count > 0)
+                {
+                    foreach (var groupUser in groupUsers)
+                    {
+                        groupUserDal.Delete(groupUser);
+                    }
+                }
+
                 if (id == 0)
                     throw new Exception("Grup silinemedi!");
 

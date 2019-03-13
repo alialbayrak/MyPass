@@ -20,7 +20,7 @@ namespace MyPass.Dal
             var query = from g in db.Groups
                         join gu in db.GroupUsers on g.Id equals gu.GroupId into gj
                         from gu in gj.DefaultIfEmpty()
-                        select new { g,gu };
+                        select new { g, gu };
 
             return query.Where(m => m.gu.UserId == userId || m.g.OwnerUserId == userId && m.g.Status == true).Select(m => m.g).ToList();
 
@@ -107,5 +107,6 @@ namespace MyPass.Dal
         }
 
         #endregion
+
     }
 }
