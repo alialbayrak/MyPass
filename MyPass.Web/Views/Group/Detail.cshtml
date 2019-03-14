@@ -1,8 +1,4 @@
 ﻿@model MyPass.Entities.ViewModel.GroupDetailViewModel
-<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.2/css/bootstrap.css" rel="stylesheet" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-
 
 @{
     ViewBag.Title = "Grup Detayı";
@@ -75,13 +71,13 @@
 
                 <div class="col-md-12">
                     @Ajax.ActionLink("Madde Ekle", "Create", "Item", new { id = Model.Group.Id }, new AjaxOptions
-            {
-                UpdateTargetId = "item",
-                InsertionMode = InsertionMode.Replace,
-                HttpMethod = "POST",
-                OnSuccess = "toAddDiv"
+                {
+                   UpdateTargetId = "item",
+                   InsertionMode = InsertionMode.Replace,
+                   HttpMethod = "POST",
+                   OnSuccess = "toAddDiv"
 
-            }, new { @class = "btn btn-success btn-block" })
+               }, new { @class = "btn btn-success btn-block" })
                 </div>
 
             </div>
