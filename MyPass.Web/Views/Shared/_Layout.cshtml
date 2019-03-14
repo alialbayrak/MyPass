@@ -70,41 +70,37 @@
             <!-- Sidebar -->
             @if (user != null)
             {
-            <div class="border-right bg-dark" id="sidebar-wrapper">
+                <div class="border-right" id="sidebar-wrapper">
 
-                <div class="list-group list-group-flush">
-                    <a href="@Url.Action(" List","Group")" class="list-group-item list-group-item-action text-white bg-dark">
-                        <i class="fa fa-archive"></i>Gruplar
-                    </a>
-                </div>
-                @if (groupList != null)
-                {
-                    <div class="list-group list-group-flush bg-dark">
-                        <div class="p-0">
-                            <div class="p-3 bg-dark text-white">
-                                <i class="fa fa-file-archive-o"></i>Grup Listesi
+                    <div class="list-group list-group-flush">
+                        <a href="@Url.Action("List","Group")" class="list-group-item list-group-item-action bg-light">Gruplar</a>
+                    </div>
+                    @if (groupList != null)
+                    {
+                        <div class="list-group list-group-flush">
+                            <div class="p-3">
+                                <div class="mb-2">Grup Listesi</div>
+                                <ul>
+                                    @foreach (var group in groupList)
+                                    {
+
+                                        <li>
+                                            <a style="color: #495057;" href="@Url.Action("Detail","Group", new { id = group.Id })">
+                                                <i class="fa fa-object-group"></i>
+                                                @group.Title
+                                            </a>
+                                        </li>
+
+
+
+                                    }
+                                </ul>
                             </div>
 
-                            <ul class="p-0 mb-0 ">
-                                @foreach (var group in groupList)
-                                {
-
-                                    <li class="mb-0 ">
-                                        <div class="list-group d-flex">
-                                            <a class="list-group-item list-group-item-action bg-dark text-white" href="@Url.Action(" Detail","Group", new { id=group.Id })">
-                                                <i class="fa fa-hashtag"></i>
-                                                @group.Title
-                                                <span class="badge badge-primary badge-pill float-right">15</span>
-                                            </a>
-
-                                        </div>
-                                    </li>
-                                }
-                            </ul>
                         </div>
-                    </div>
-                }
-            </div>
+                    }
+
+                </div>
 
             }
             <!-- End Sidebar -->
