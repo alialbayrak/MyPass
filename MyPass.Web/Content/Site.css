@@ -57,8 +57,11 @@
 }
 
     #sidebar-wrapper .sidebar-heading {
-        padding: 0.875rem 1.25rem;
+        padding: .6rem 1rem;
         font-size: 1.2rem;
+        display: block;
+        text-decoration: none;
+        color: white;
     }
 
     #sidebar-wrapper .list-group {
@@ -86,4 +89,41 @@
     #wrapper.toggled #sidebar-wrapper {
         margin-left: -15rem;
     }
+}
+
+.mypass-sidebar {
+    background-color: #374350;
+    width: 25%;
+}
+
+    .mypass-sidebar .mypass-sidebar-item {
+        background-color: #374350;
+        color: white;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        text-decoration: none;
+    }
+
+    .mypass-sidebar a.mypass-sidebar-item:hover {
+        background-color: #27303a;
+    }
+
+    .mypass-sidebar .mypass-sidebar-menu {
+        background-color: #374350;
+        color: white;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        text-decoration: none;
+    }
+
+    .mypass-sidebar a.mypass-sidebar-menu:hover {
+        background-color: #27303a;
+    }
+
+.border-bottom-dark {
+    background-color: black;
 }
