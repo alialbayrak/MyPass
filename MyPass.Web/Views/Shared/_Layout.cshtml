@@ -22,93 +22,88 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div>
-        <nav class="d-flex navbar navbar-expand-lg border-bottom" style="background-color:#374350;">
-            <a class="sidebar-heading text-white text-decoration-none flex-grow-1" href="/Home/Index/" style="font-size: 25px">MyPass</a>
-            <button class="btn btn-warning btn-sm d-md-none" id="menu-toggle">Menü</button>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fa fa-bars text-white" aria-hidden="true"></i>
-            </button>
+    <div id="wrapper" class="d-flex">
+        <!-- Sidebar -->
+        @if (user != null)
+        {
+            <div class="mypass-sidebar" id="sidebar-wrapper" style="position: relative;">
+                <div class="border-bottom mb-3">
+                    <a class="sidebar-heading" href="/Home/Index/" style="font-size: 25px">MyPass</a>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                    @if (user == null)
-                    {
-                        <li class="nav-item no-arrow">
-                            <a href="@Url.Action("Login","User")" class="nav-link"><span class="btn btn-primary">Giriş Yap</span></a>
-                        </li>
-                        <li class="nav-item no-arrow">
-                            <a href="@Url.Action("Register","User")" class="nav-link"><span class="btn btn-primary">Kayıt Ol</span></a>
-                        </li>
-                    }
-                    else
-                    {
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                @user.Email
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Ayarlar</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="@Url.Action("Logout", "User")">Çıkış Yap</a>
-                            </div>
-                        </li>
-                    }
-
-                </ul>
-
-
-            </div>
-        </nav>
-        <!-- Page Wrapper -->
-        <div id="wrapper" class="d-flex">
-
-
-
-
-            <!-- Sidebar -->
-            @if (user != null)
-            {
-                <div class="border-right bg-dark" id="sidebar-wrapper">
-
-                    <div class="list-group list-group-flush">
-                        <a href="@Url.Action("List","Group")" class="list-group-item list-group-item-action text-white bg-dark">
-                            <i class="fa fa-archive"></i>Gruplar
-                        </a>
-                    </div>
-                    @if (groupList != null)
-                    {
-                        <div class="list-group list-group-flush bg-dark">
-                            <div class="p-0">
-                                <div class="p-3 bg-dark text-white">
-                                    <i class="fa fa-file-archive-o"></i>Grup Listesi
-                                </div>
-
-                                <ul class="p-0 mb-0 ">
-                                    @foreach (var group in groupList)
-                                    {
-
-                                        <li class="mb-0 ">
-                                            <div class="list-group d-flex">
-                                                <a class="list-group-item list-group-item-action bg-dark text-white" href="@Url.Action("Detail","Group", new { id=group.Id })">
-                                                    <i class="fa fa-hashtag"></i>
-                                                    @group.Title
-                                                    <span class="badge badge-primary badge-pill float-right">15</span>
-                                                </a>
-
-                                            </div>
-                                        </li>
-                                    }
-                                </ul>
-                            </div>
-                        </div>
-                    }
                 </div>
+                <div>
+                    <a class="mypass-sidebar-menu d-flex" href="@Url.Action("List","Group")">
+                        <div><i class="fa fa-archive"></i></div>
+                        <div class="flex-grow-1 ml-2">Gruplar</div>
+                    </a>
+                </div>
+                @if (groupList != null)
+                {
 
-            }
-            <!-- End Sidebar -->
+                    <div style="position: fixed; bottom: 10px; width: 20%;">
+                        <div class="mypass-sidebar-item d-flex border-bottom-0">
+                            <div><i class="fa fa-file-archive-o"></i></div>
+                            <div class="flex-grow-1 ml-2">Grup Listesi</div>
+                        </div>
+                        @foreach (var group in groupList)
+                        {
 
+                            <div>
+                                <a class="pl-4 pr-5 pt-1 pb-1 mypass-sidebar-item border-top-0 d-flex text-white" href="@Url.Action("Detail","Group", new { id=group.Id })">
+                                    <div><i class="fa fa-hashtag"></i></div>
+                                    <div class="flex-grow-1 ml-1 mr-1">@group.Title</div>
+                                    <span class="badge badge-primary badge-pill float-right bg-dark">15</span>
+                                </a>
+                            </div>
+
+                        }
+                    </div>
+
+                }
+            </div>
+
+        }
+        <!-- End Sidebar -->
+        <div style="width: 100%;">
+
+            <nav class="d-flex navbar navbar-expand-lg border-bottom-dark" style="background-color:#374350;">
+                <button class="btn btn-warning btn-sm d-md-none" id="menu-toggle">Menü</button>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-bars text-white" aria-hidden="true"></i>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                        @if (user == null)
+                        {
+                            <li class="nav-item no-arrow">
+                                <a href="@Url.Action("Login","User")" class="nav-link"><span class="btn btn-primary">Giriş Yap</span></a>
+                            </li>
+                            <li class="nav-item no-arrow">
+                                <a href="@Url.Action("Register","User")" class="nav-link"><span class="btn btn-primary">Kayıt Ol</span></a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    @user.Email
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Ayarlar</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="@Url.Action("Logout", "User")">Çıkış Yap</a>
+                                </div>
+                            </li>
+                        }
+
+                    </ul>
+
+
+                </div>
+            </nav>
+            <!-- Page Wrapper -->
 
             <div id="page-content-wrapper">
 
@@ -125,6 +120,11 @@
             </div>
 
         </div>
+
+
+
+
+
 
     </div>
 
