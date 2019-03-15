@@ -49,7 +49,6 @@
 
 #sidebar-wrapper {
     min-height: 100vh;
-    margin-left: -15rem;
     -webkit-transition: margin .25s ease-out;
     -moz-transition: margin .25s ease-out;
     -o-transition: margin .25s ease-out;
@@ -97,7 +96,7 @@
 
     .mypass-sidebar .mypass-sidebar-item {
         background-color: #374350;
-        color: white;
+        color: #e1e1e1 !important;
         padding-left: 20px;
         padding-right: 20px;
         padding-top: 5px;
@@ -111,7 +110,7 @@
 
     .mypass-sidebar .mypass-sidebar-menu {
         background-color: #374350;
-        color: white;
+        color: #e1e1e1 !important;
         padding-left: 20px;
         padding-right: 20px;
         padding-top: 15px;
