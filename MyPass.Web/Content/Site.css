@@ -91,11 +91,11 @@
 }
 
 .mypass-sidebar {
-    background-color: #374350;
+    background-color: #363F46;
 }
 
     .mypass-sidebar .mypass-sidebar-item {
-        background-color: #374350;
+        background-color: #363F46;
         color: #e1e1e1 !important;
         padding-left: 20px;
         padding-right: 20px;
@@ -105,11 +105,11 @@
     }
 
     .mypass-sidebar a.mypass-sidebar-item:hover {
-        background-color: #27303a;
+        background-color: #538fd0;
     }
 
     .mypass-sidebar .mypass-sidebar-menu {
-        background-color: #374350;
+        background-color: #363F46;
         color: #e1e1e1 !important;
         padding-left: 20px;
         padding-right: 20px;
@@ -119,7 +119,7 @@
     }
 
     .mypass-sidebar a.mypass-sidebar-menu:hover {
-        background-color: #27303a;
+        background-color: #538fd0;
     }
 
 .border-bottom-dark {

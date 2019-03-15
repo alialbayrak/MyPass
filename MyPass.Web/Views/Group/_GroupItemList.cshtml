@@ -1,7 +1,7 @@
 ﻿@model MyPass.Entities.Group
 
 
-<div class="accordion">
+<div id="accordion">
     @foreach (var item in Model.ItemList)
     {
         <div class="card">
@@ -30,7 +30,6 @@
                                 </div>
                                 <div class="col-md-10">
                                     @item.Description
-
                                 </div>
                             </div>
                         </li>

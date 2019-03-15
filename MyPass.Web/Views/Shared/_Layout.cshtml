@@ -23,8 +23,8 @@
 </head>
 <body onload="onload()">
 
-    <nav class="d-flex navbar navbar-expand-lg border-bottom-dark" style="background-color:#2769b1;">
-        <div class="navbar-brand mr-0 col-md-2 col-6">
+    <nav class="d-flex navbar navbar-expand-lg border-bottom-dark position-fixed col-md-12" style="background-color:#538fd0; border: 1px solid #363f46;z-index: 99;">
+        <div class="navbar-brand mr-0 col-md-2 col-xl-3 col-6">
             <a class="text-white" href="/Home/Index/" style="font-size: 25px; text-decoration: none;">
                 <div style="margin:auto">MyPass</div>
             </a>
@@ -80,7 +80,7 @@
         <!-- Sidebar -->
         @if (user != null)
         {
-            <div class="mypass-sidebar d-md-block col-md-2 p-0 d-none col-8 position-fixed" id="sidebar-wrapper" style="z-index: 999;">
+            <div class="mypass-sidebar p-0 d-md-block col-md-3 d-none col-8 col-lg-2 position-fixed" id="sidebar-wrapper" style="margin-top: 65px;">
                 <div>
                     <a class="mypass-sidebar-menu d-flex" href="@Url.Action("List","Group")">
                         <div><i class="fa fa-archive"></i></div>
@@ -90,7 +90,7 @@
                 @if (groupList != null)
                 {
 
-                    <div id="group-list" class="col-md-2 d-md-block d-none p-0 position-fixed" style="bottom: 10px;">
+                    <div id="group-list" class="col-md-3 col-lg-2 col-8 d-md-block d-none p-0 position-fixed" style="bottom: 10px;">
                         <div class="mypass-sidebar-item d-flex border-bottom-0">
                             <div><i class="fa fa-file-archive-o"></i></div>
                             <div class="flex-grow-1 ml-2"><b>Grup Listesi</b></div>
@@ -113,25 +113,20 @@
 
         }
         <!-- End Sidebar -->
-        <div id="delete" class="col-md-2 p-0"></div>
-        <div style="width: 100%;">
-
-
-            <div id="page-content-wrapper">
-
-                <!-- Header -->
-                <!-- End Header -->
 
 
 
-                <div class="container-fluid pt-4">
-                    @RenderBody()
-                </div>
 
 
-            </div>
 
+        <div id="content" class="container-fluid pt-4 offset-md-3 offset-lg-2" style="margin-top: 65px;">
+            @RenderBody()
         </div>
+
+
+
+
+
 
 
 
@@ -162,7 +157,7 @@
         function onload() {
 
             if (pageTitle == "Home Page") {
-                $("#delete").addClass("d-none");
+                $("#content").toggleClass("offset-md-3 offset-lg-2");
             }
 
         }

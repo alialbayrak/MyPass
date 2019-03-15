@@ -71,13 +71,13 @@
 
                 <div class="col-md-12">
                     @Ajax.ActionLink("Madde Ekle", "Create", "Item", new { id = Model.Group.Id }, new AjaxOptions
-                {
-                   UpdateTargetId = "item",
-                   InsertionMode = InsertionMode.Replace,
-                   HttpMethod = "POST",
-                   OnSuccess = "toAddDiv"
+                    {
+                        UpdateTargetId = "item",
+                        InsertionMode = InsertionMode.Replace,
+                        HttpMethod = "POST",
+                        OnSuccess = "toAddDiv"
 
-               }, new { @class = "btn btn-success btn-block" })
+                    }, new { @class = "btn btn-success btn-block" })
                 </div>
 
             </div>
