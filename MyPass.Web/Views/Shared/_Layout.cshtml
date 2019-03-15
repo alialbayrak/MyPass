@@ -21,12 +21,12 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
+<body onload="onload()">
     <div id="wrapper" class="d-flex">
         <!-- Sidebar -->
         @if (user != null)
         {
-            <div class="mypass-sidebar" id="sidebar-wrapper" style="position: relative;">
+            <div class="mypass-sidebar col-md-2 p-0" id="sidebar-wrapper" style="position: fixed; z-index: 999">
                 <div class="border-bottom mb-3">
                     <a class="sidebar-heading" href="/Home/Index/" style="font-size: 25px">MyPass</a>
 
@@ -34,13 +34,13 @@
                 <div>
                     <a class="mypass-sidebar-menu d-flex" href="@Url.Action("List","Group")">
                         <div><i class="fa fa-archive"></i></div>
-                        <div class="flex-grow-1 ml-2">Gruplar</div>
+                        <div class="flex-grow-1 ml-3">Gruplar</div>
                     </a>
                 </div>
                 @if (groupList != null)
                 {
 
-                    <div style="position: fixed; bottom: 10px; width: 20%;">
+                    <div class="col-md-2 p-0" style="position: fixed; bottom: 10px;">
                         <div class="mypass-sidebar-item d-flex border-bottom-0">
                             <div><i class="fa fa-file-archive-o"></i></div>
                             <div class="flex-grow-1 ml-2">Grup Listesi</div>
@@ -64,6 +64,7 @@
 
         }
         <!-- End Sidebar -->
+        <div id="delete" class="col-md-2"></div>
         <div style="width: 100%;">
 
             <nav class="d-flex navbar navbar-expand-lg border-bottom-dark" style="background-color:#374350;">
@@ -128,16 +129,28 @@
 
     </div>
 
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 
     <script>
+        let pageTitle = "@ViewBag.Title"; 
+
         $("#menu-toggle").click(function (e) {
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
         });
+
+
+        function onload() {
+
+            if (pageTitle == "Home Page") {
+                $("#delete").addClass("d-none");
+            }
+            
+        }
     </script>
+
+
 </body>
 </html>
