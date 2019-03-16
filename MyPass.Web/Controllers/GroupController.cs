@@ -188,7 +188,7 @@ namespace MyPass.Web.Controllers
             }
             catch(Exception ex)
             {
-                return View("Index");
+                throw new Exception(ex.Message);
             }
         }
 

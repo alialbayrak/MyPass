@@ -35,24 +35,29 @@ namespace MyPass.Bll
 
         }
 
-        public int Remove(int groupId, int userId)
+        public int Remove(int groupId, int currentUserId)
         {
             int id = 0;
-            Group group = _dal.GetById(groupId, userId);
+            Group group = _dal.GetById(groupId, currentUserId);
             if (group != null)
             {
                 GroupUserDal groupUserDal = new GroupUserDal();
                 List<GroupUser> groupUsers = groupUserDal.GetByGroupId(groupId);
-                
-                id = _dal.Delete(group);
-
-                if (groupUsers != null && groupUsers.Count > 0)
+                if (group.OwnerUserId == currentUserId)
                 {
-                    foreach (var groupUser in groupUsers)
+                    id = _dal.Delete(group);
+
+                    if (groupUsers != null && groupUsers.Count > 0)
                     {
-                        groupUserDal.Delete(groupUser);
+                        foreach (var groupUser in groupUsers)
+                        {
+                            groupUserDal.Delete(groupUser);
+                        }
                     }
                 }
+                else
+                    throw new Exception("Grup sahibi olmadan silemezsiniz!");
+                
 
                 if (id == 0)
                     throw new Exception("Grup silinemedi!");
@@ -87,11 +92,11 @@ namespace MyPass.Bll
             UserDal userDal = new UserDal();
             User user = userDal.GetUserByEmailAdress(email);
 
-            if(user.Id == currentUserId)
-                throw new Exception("Kendinizi ekleyemezsiniz!");
-
             if (user == null)
                 throw new Exception("Kullanıcı bulunamadı!");
+
+            if (user.Id == currentUserId)
+                throw new Exception("Kendinizi ekleyemezsiniz!");
 
             GroupUser groupUser = new GroupUser{
                 GroupId = groupId,

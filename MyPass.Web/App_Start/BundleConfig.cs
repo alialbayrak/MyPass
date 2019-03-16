@@ -28,6 +28,9 @@ namespace MyPass.Web
                       "~/Content/bootstrap.min.css",
                       "~/Content/font-awesome.min.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/common").Include(
+                     "~/Scripts/MyPassCommon.js"));
         }
     }
 }

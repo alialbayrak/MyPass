@@ -1,5 +1,5 @@
 ﻿@model List<MyPass.Entities.User>
-
+@Html.ValidationSummary()
 @if (Model != null && Model.Count > 0)
 {
     @Html.Label("Paylaşılan Kullanıcılar")
