@@ -19,5 +19,9 @@ namespace MyPass.Web.Controllers
             return View();
         }
 
+        public ActionResult Default()
+        {
+            return View();
+        }
     }
 }

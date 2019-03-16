@@ -234,7 +234,8 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -272,6 +273,7 @@
     <Content Include="Views\Item\List.cshtml" />
     <Content Include="Views\Group\_GroupItemList.cshtml" />
     <Content Include="Views\Group\_GroupUserList.cshtml" />
+    <Content Include="Views\Error\Default.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
