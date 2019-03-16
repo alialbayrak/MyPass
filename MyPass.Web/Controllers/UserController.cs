@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using MyPass.Entities.ViewModel;
 using MyPass.Web.Filter;
+using MyPass.Web.Model;
 
 namespace MyPass.Web.Controllers
 {
@@ -74,7 +75,6 @@ namespace MyPass.Web.Controllers
                     {
                         Session["User"] = user;
                         GroupManager groupBll = new GroupManager();
-                        Session["GroupList"] = groupBll.FindAll(user.Id);
                         return RedirectToAction("Index", "Home");
                     }
                 }
@@ -91,6 +91,7 @@ namespace MyPass.Web.Controllers
         public ActionResult Logout(int? id)
         {
             Session.Abandon();
+            CacheHelper.RemoveGroups();
             return RedirectToAction("Index", "Home");
         }
 

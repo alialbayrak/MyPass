@@ -1,4 +1,6 @@
 ﻿@using MyPass.Entities
+@using MyPass.Web.Model;
+
 @{
     User user = null;
     if (Session["User"] != null)
@@ -7,10 +9,11 @@
     }
 
     List<Group> groupList = null;
-    if (Session["GroupList"] != null)
+    if (user != null)
     {
-        groupList = Session["GroupList"] as List<Group>;
+        groupList = CacheHelper.GetGroupsByUserId(user.Id);
     }
+
 }
 <!DOCTYPE html>
 <html>

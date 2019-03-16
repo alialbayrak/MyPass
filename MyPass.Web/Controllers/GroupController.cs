@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using MyPass.Web.Filter;
 using MyPass.Entities.ViewModel;
+using MyPass.Web.Model;
 
 namespace MyPass.Web.Controllers
 {
@@ -67,11 +68,7 @@ namespace MyPass.Web.Controllers
                 {
                     group.OwnerUserId = (Session["User"] as User).Id;
                     _bll.AddGroup(group);
-                    if (Session["GroupList"] == null)
-                        Session["GroupList"] = new List<Group>();
-
-                    (Session["GroupList"] as List<Group>).Add(group);
-                        
+                    CacheHelper.RemoveGroups();                      
 
                     return RedirectToAction("Detail", "Group", new { id = group.Id });
                 }
@@ -178,7 +175,7 @@ namespace MyPass.Web.Controllers
                 if(id != null)
                 {
                     _bll.Remove((int)id, (Session["User"] as User).Id);
-                    Session["GroupList"] = _bll.FindAll((Session["User"] as User).Id);
+                    CacheHelper.RemoveGroups();
                 }
                     
                 else
