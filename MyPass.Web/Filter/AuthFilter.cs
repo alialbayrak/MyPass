@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyPass.Web.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +11,7 @@ namespace MyPass.Web.Filter
     {
         public void OnAuthorization(AuthorizationContext filterContext)
         {
-            if (filterContext.HttpContext.Session["User"] == null)
+            if (SessionHelper.GetCurrentUser() == null)
             {
                 filterContext.Result = new RedirectResult("/User/Login");
             }

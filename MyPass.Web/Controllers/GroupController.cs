@@ -16,7 +16,6 @@ namespace MyPass.Web.Controllers
     {
         private GroupManager _bll = new GroupManager();
 
-        // GET: Group
         public ActionResult Index()
         {
             return RedirectToAction("List");
@@ -24,7 +23,7 @@ namespace MyPass.Web.Controllers
 
         public ActionResult List()
         {
-            List<Group> groups = _bll.FindAll((Session["User"] as User).Id);
+            List<Group> groups = _bll.FindAll(SessionHelper.GetCurrentUser().Id);
             return View(groups);
         }
 
@@ -33,7 +32,7 @@ namespace MyPass.Web.Controllers
         {
             if (id != null)
             {
-                int userId = (Session["User"] as User).Id;
+                int userId = SessionHelper.GetCurrentUser().Id;
                 Group group = _bll.Find((int)id, userId);
                 List<User> groupUserList = _bll.FindGroupUsers((int)id);
                 GroupDetailViewModel model = new GroupDetailViewModel()
@@ -58,7 +57,6 @@ namespace MyPass.Web.Controllers
             return View(new Group());
         }
 
-
         [HttpPost]
         public ActionResult Create(Group group)
         {
@@ -66,9 +64,9 @@ namespace MyPass.Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    group.OwnerUserId = (Session["User"] as User).Id;
+                    group.OwnerUserId = SessionHelper.GetCurrentUser().Id;
                     _bll.AddGroup(group);
-                    CacheHelper.RemoveGroups();                      
+                    SessionHelper.RemoveGroups();                      
 
                     return RedirectToAction("Detail", "Group", new { id = group.Id });
                 }
@@ -82,6 +80,7 @@ namespace MyPass.Web.Controllers
                 return View(group);
             }
         }
+
         #endregion
 
         #region Edit
@@ -90,7 +89,7 @@ namespace MyPass.Web.Controllers
         {
             if (id != null)
             {
-                int userId = (Session["User"] as User).Id;
+                int userId = SessionHelper.GetCurrentUser().Id;
                 Group group = _bll.Find((int)id, userId);
                 List<User> groupUserList = _bll.FindGroupUsers((int)id);
 
@@ -134,7 +133,7 @@ namespace MyPass.Web.Controllers
             List<User> model = new List<User>();
             try
             {
-                _bll.ShareGroup(email, groupId, (Session["User"] as User).Id);
+                _bll.ShareGroup(email, groupId, SessionHelper.GetCurrentUser().Id);
                 model = _bll.FindGroupUsers(groupId);
 
             }
@@ -153,7 +152,7 @@ namespace MyPass.Web.Controllers
             List<User> model = new List<User>();
             try
             {
-                _bll.UnShareGroup(userId, groupId, (Session["User"] as User).Id);
+                _bll.UnShareGroup(userId, groupId, SessionHelper.GetCurrentUser().Id);
                 model = _bll.FindGroupUsers(groupId);
             }
             catch (Exception ex)
@@ -167,15 +166,14 @@ namespace MyPass.Web.Controllers
 
         #endregion
 
-
         public ActionResult Delete(int? id)
         {
             try
             {
                 if(id != null)
                 {
-                    _bll.Remove((int)id, (Session["User"] as User).Id);
-                    CacheHelper.RemoveGroups();
+                    _bll.Remove((int)id, SessionHelper.GetCurrentUser().Id);
+                    SessionHelper.RemoveGroups();
                 }
                     
                 else
@@ -188,18 +186,6 @@ namespace MyPass.Web.Controllers
                 throw new Exception(ex.Message);
             }
         }
-
-
-        #region Items
-
-        public ActionResult Items(int? id)
-        {
-            //gruba bağlı itemları getir
-            //view item list olarak göster
-            return null;
-        }
-
-        #endregion
 
     }
 }

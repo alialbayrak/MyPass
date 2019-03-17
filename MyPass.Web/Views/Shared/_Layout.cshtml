@@ -2,16 +2,12 @@
 @using MyPass.Web.Model;
 
 @{
-    User user = null;
-    if (Session["User"] != null)
-    {
-        user = Session["User"] as User;
-    }
+    User user = SessionHelper.GetCurrentUser();
 
     List<Group> groupList = null;
     if (user != null)
     {
-        groupList = CacheHelper.GetGroupsByUserId(user.Id);
+        groupList = SessionHelper.GetGroupsByUserId(user.Id);
     }
 
 }

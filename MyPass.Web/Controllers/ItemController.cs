@@ -2,6 +2,7 @@
 using MyPass.Bll.Helper;
 using MyPass.Entities;
 using MyPass.Web.Filter;
+using MyPass.Web.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,6 @@ namespace MyPass.Web.Controllers
     {
         private ItemManager _bll = new ItemManager();
 
-        // GET: Item
         public ActionResult Index()
         {
             return View();
@@ -23,7 +23,7 @@ namespace MyPass.Web.Controllers
 
         public ActionResult Edit(int id)
         {
-            int userId = (Session["User"] as User).Id;
+            int userId = SessionHelper.GetCurrentUser().Id;
             Item item = _bll.FindItem(id, userId);
             item.Password = SecurityHelper.Decode(item.Password);
             return View(item);
@@ -49,13 +49,11 @@ namespace MyPass.Web.Controllers
             return View(item);
         }
 
-        // GET: Item/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Item/Create
         [HttpPost]
         public PartialViewResult Create(int id)
         {

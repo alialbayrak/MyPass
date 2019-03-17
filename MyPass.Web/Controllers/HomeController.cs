@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using MyPass;
 using MyPass.Entities;
 using MyPass.Web.Filter;
+using MyPass.Web.Model;
 
 namespace MyPass.Web.Controllers
 {
@@ -22,10 +23,11 @@ namespace MyPass.Web.Controllers
 
         public ActionResult Index()
         {
-            if (Session["User"] != null)
+            if (SessionHelper.GetCurrentUser() != null)
                 return RedirectToAction("Dashboard");
 
             return View();
         }
+
     }
 }

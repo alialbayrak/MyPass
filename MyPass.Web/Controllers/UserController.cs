@@ -15,7 +15,6 @@ namespace MyPass.Web.Controllers
     {
         private UserManager _bll = new UserManager();
 
-        // GET: User
         public ActionResult Index()
         {
             return RedirectToAction("Login");
@@ -73,8 +72,7 @@ namespace MyPass.Web.Controllers
                     User user = _bll.LoginUser(userLogin.Email, userLogin.Password);
                     if (user != null)
                     {
-                        Session["User"] = user;
-                        GroupManager groupBll = new GroupManager();
+                        SessionHelper.AddCurrentUser(user);
                         return RedirectToAction("Index", "Home");
                     }
                 }
@@ -91,7 +89,6 @@ namespace MyPass.Web.Controllers
         public ActionResult Logout(int? id)
         {
             Session.Abandon();
-            CacheHelper.RemoveGroups();
             return RedirectToAction("Index", "Home");
         }
 
