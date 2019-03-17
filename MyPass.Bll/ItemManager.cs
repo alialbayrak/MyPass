@@ -36,5 +36,34 @@ namespace MyPass.Bll
         {
             return SecurityHelper.Decode(_dal.GetById(id, 0).Password);
         }
+
+        public int Remove(int itemId, int currentUserId)
+        {
+            int groupId = 0;
+            Item item = _dal.GetById(itemId, currentUserId);
+            
+            if (item != null)
+            {
+                GroupManager groupManager = new GroupManager();
+                Group group = groupManager.Find(item.GroupId, currentUserId);
+                if (group != null)
+                {
+                    if (group.OwnerUserId == currentUserId)
+                    {
+                        _dal.Delete(item);
+                        groupId = group.Id;
+                    }
+                    else
+                        throw new Exception("Grup sahibi olmadan silemezsiniz!");
+                }
+                else
+                    throw new Exception("Bu maddeyi silemezsiniz!");
+            }
+            else
+                throw new Exception("Madde bulunamadı!");
+
+            return groupId;
+
+        }
     }
 }

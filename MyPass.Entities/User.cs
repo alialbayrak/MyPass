@@ -27,5 +27,7 @@ namespace MyPass.Entities
         [Display(Name = "Şifre"), Required, DataType(DataType.Password), MinLength(8, ErrorMessage = "Şifreniz en az 8 karakter olmalıdır!")]
         [RegularExpression("^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-zA-Z]).{1,}$", ErrorMessage = "Şifreniz en az bir rakam ve bir büyük harf olmalıdır")]
         public string Password { get; set; }
+
+        public virtual List<Group> Groups { get; set; }
     }
 }

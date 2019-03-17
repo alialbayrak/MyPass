@@ -23,5 +23,7 @@ namespace MyPass.Entities
 
         public virtual List<Item> ItemList { get; set; }
 
+        public virtual List<GroupUser> GroupUserList { get; set; }
+
     }
 }

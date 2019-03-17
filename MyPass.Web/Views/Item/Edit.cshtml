@@ -5,9 +5,15 @@
 }
 <div class="container">
     <div class="card shadow">
-        <h5 class="card-header">
-            @ViewBag.Title
-        </h5>
+        <div class="card-header d-flex align-items-center">
+            <div class="flex-grow-1">
+                <h5 class="m-0">@ViewBag.Title</h5>
+            </div>
+            <div>
+                @Html.ActionLink("Sil","Delete","Item", new { id = Model.Id }, new { @class = "btn btn-danger", onClick = "return confirm('maddeyi silmek istediğinize emin misiniz?')" })
+            </div>
+            
+        </div>
         <div class="card-body">
             @using (Html.BeginForm("Edit", "Item", FormMethod.Post))
             {

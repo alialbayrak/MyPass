@@ -23,7 +23,14 @@ namespace MyPass.Dal
 
         public int Delete(Item model)
         {
-            throw new NotImplementedException();
+            model.Status = false;
+            model.UpdatedDate = DateTime.Now;
+            var entry = db.Entry(model);
+            entry.State = EntityState.Modified;
+
+            entry.Property(m => m.AddedDate).IsModified = false;
+
+            return db.SaveChanges();
         }
 
         public List<Item> GetAll(int userId)
@@ -34,7 +41,6 @@ namespace MyPass.Dal
         public Item GetById(int id, int userId)
         {
             return db.Items.FirstOrDefault(m => m.Id == id && m.Status == true);
-
         }
 
         public int Update(Item model)

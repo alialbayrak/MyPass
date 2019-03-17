@@ -40,24 +40,18 @@ namespace MyPass.Bll
             Group group = _dal.GetById(groupId, currentUserId);
             if (group != null)
             {
-                GroupUserDal groupUserDal = new GroupUserDal();
-                List<GroupUser> groupUsers = groupUserDal.GetByGroupId(groupId);
                 if (group.OwnerUserId == currentUserId)
                 {
-                    id = _dal.Delete(group);
-
-                    if (groupUsers != null && groupUsers.Count > 0)
+                    ItemDal itemDal = new ItemDal();
+                    foreach (var item in group.ItemList)
                     {
-                        foreach (var groupUser in groupUsers)
-                        {
-                            groupUserDal.Delete(groupUser);
-                        }
+                        itemDal.Delete(item);
                     }
+                    id = _dal.Delete(group);
                 }
                 else
                     throw new Exception("Grup sahibi olmadan silemezsiniz!");
                 
-
                 if (id == 0)
                     throw new Exception("Grup silinemedi!");
 

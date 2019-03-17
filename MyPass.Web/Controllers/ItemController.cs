@@ -90,5 +90,27 @@ namespace MyPass.Web.Controllers
         {
             return _bll.FindPassword(id);
         }
+
+        public ActionResult Delete(int? id)
+        {
+            int groupId = 0;
+            try
+            {
+                if (id != null)
+                {
+                    groupId = _bll.Remove((int)id, SessionHelper.GetCurrentUser().Id);
+                    SessionHelper.RemoveGroups();
+                }
+                else
+                    return new HttpStatusCodeResult(400, "Opps");
+
+                return RedirectToAction("Detail","Group",new { id = groupId });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
     }
 }

@@ -60,12 +60,6 @@
                             </td>
                             <td>
                                 @Html.ActionLink("Detay", "Detail", new { id = group.Id }, new { @class = "btn btn-info btn-sm" })
-                                @Ajax.ActionLink("Sil", "Delete", new { id = group.Id }, new AjaxOptions
-                                {
-                                    HttpMethod = "POST",
-                                    OnSuccess = "OnSuccess",
-                                    OnFailure = "OnFailure"
-                                }, new { @class = "btn btn-danger btn-sm px-4", onClick = "return confirm('Grubu silmek istediğinize emin misiniz?')" })
                             </td>
                         </tr>
                     }

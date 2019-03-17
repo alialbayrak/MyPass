@@ -10,8 +10,12 @@
                 <h5>@ViewBag.Title</h5>
             </div>
             <div>
+                <span>
+                    @Html.ActionLink("Sil", "Delete", "Group", new { id = Model.Group.Id }, new { @class = "btn btn-danger", onClick = "return confirm('Grubu silmek istediğinize emin misiniz?')" })
+                </span>
                 <span>@Html.ActionLink("Düzenle", "Edit", new { id = Model.Group.Id }, new { @class = "btn btn-info" })</span>
                 <span>@Html.ActionLink("Listeye Geri Dön", "List", null, new { @class = "btn btn-warning" })</span>
+
             </div>
 
 

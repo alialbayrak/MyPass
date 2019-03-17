@@ -15,6 +15,7 @@ namespace MyPass.Entities
 
         [Required]
         public bool Status { get; set; }
+
         [Display(Name = "Eklenme Tarihi"), Required, DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public DateTime AddedDate { get; set; }
 

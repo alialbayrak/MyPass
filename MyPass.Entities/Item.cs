@@ -27,6 +27,8 @@ namespace MyPass.Entities
         [Required]
         public ItemType ItemTypeId { get; set; }
 
+        public virtual List<GroupUser> GroupUserList { get; set; }
+
         public enum ItemType{
             Password = 1,
             List = 2,
