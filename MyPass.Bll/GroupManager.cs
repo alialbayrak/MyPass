@@ -29,7 +29,6 @@ namespace MyPass.Bll
         public Group Find(int groupId, int userId)
         {
             Group group = _dal.GetById(groupId, userId);
-            FillItems(group);
 
             return group;
 
@@ -75,7 +74,7 @@ namespace MyPass.Bll
             return _dal.Update(group);
         }
 
-        public Group FillItems(Group group)
+        /*public Group FillItems(Group group)
         {
             group.ItemList = _dal.GetGroupItems(group.Id);
 
@@ -85,7 +84,7 @@ namespace MyPass.Bll
             }
 
             return group;
-        }
+        }*/
 
         public void ShareGroup(string email, int groupId, int currentUserId)
         {

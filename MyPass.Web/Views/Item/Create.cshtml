@@ -8,7 +8,7 @@
     <div class="card shadow">
         <h5 class="card-header">@ViewBag.Title</h5>
         <div class="card-body">
-            @using (Ajax.BeginForm("SaveItem", "Item", new AjaxOptions
+            @using (Ajax.BeginForm("Create", "Item", new AjaxOptions
             {
 
                 HttpMethod = "POST",

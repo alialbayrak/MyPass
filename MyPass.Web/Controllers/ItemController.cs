@@ -49,18 +49,11 @@ namespace MyPass.Web.Controllers
             return View(item);
         }
 
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public PartialViewResult Create(int id)
+        public PartialViewResult Create(int id) 
         {
             Item item = new Item { GroupId = id, ItemTypeId = Item.ItemType.Password };
             try
             {
-                
                 return PartialView("Create", item);
             }
             catch
@@ -70,7 +63,7 @@ namespace MyPass.Web.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public PartialViewResult SaveItem(Item item)
+        public PartialViewResult Create(Item item)
         {
             if (ModelState.IsValid)
             {
@@ -78,9 +71,8 @@ namespace MyPass.Web.Controllers
                 {
                     _bll.AddItem(item);
                     GroupManager groupManager = new GroupManager();
-                    var group = new Group();
-                    group.Id = item.GroupId;
-                    group = groupManager.FillItems(group);
+                    Group group = groupManager.Find(item.GroupId, SessionHelper.GetCurrentUser().Id);
+                    SessionHelper.RemoveGroups();
                     return PartialView("~/Views/Group/_GroupItemList.cshtml", group);
                 }
                 catch(Exception ex)
