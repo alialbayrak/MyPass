@@ -38,14 +38,30 @@ namespace MyPass.Bll.Helper
 
         public static string Encode(string encodeMe)
         {
-            byte[] encoded = System.Text.Encoding.UTF8.GetBytes(encodeMe);
-            return Convert.ToBase64String(encoded);
+            try
+            {
+                byte[] encoded = System.Text.Encoding.UTF8.GetBytes(encodeMe);
+                return Convert.ToBase64String(encoded);
+            }
+            catch (Exception)
+            {
+                return encodeMe;
+            }
+            
         }
 
         public static string Decode(string decodeMe)
         {
-            byte[] encoded = Convert.FromBase64String(decodeMe);
-            return System.Text.Encoding.UTF8.GetString(encoded);
+            try
+            {
+                byte[] encoded = Convert.FromBase64String(decodeMe);
+                return System.Text.Encoding.UTF8.GetString(encoded);
+            }
+            catch (Exception)
+            {
+                return decodeMe;
+            }
+            
         }
     }
 }

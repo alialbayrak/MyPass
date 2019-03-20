@@ -16,23 +16,19 @@ namespace MyPass.Entities
         public string Title { get; set; }
 
         [Display(Name = "Açıklama"), DataType(DataType.MultilineText), StringLength(500)]
-        public string Description { get; set; }
+        public string Nodes { get; set; }
+
+        public string Url { get; set; }
+
+        public string Username { get; set; }
 
         [Display(Name = "Şifre"), Required, StringLength(100)]
         public string Password { get; set; }
 
         [Required]
-        public int GroupId { get; set; }
+        public int CategoryId { get; set; }
 
-        [Required]
-        public ItemType ItemTypeId { get; set; }
-
-        public virtual List<GroupUser> GroupUserList { get; set; }
-
-        public enum ItemType{
-            Password = 1,
-            List = 2,
-
-        }
+        public virtual Category Category { get; set; }
     }
+
 }

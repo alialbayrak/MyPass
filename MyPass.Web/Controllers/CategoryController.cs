@@ -8,13 +8,14 @@ using System.Web.Mvc;
 using MyPass.Web.Filter;
 using MyPass.Entities.ViewModel;
 using MyPass.Web.Model;
+using System.Net;
 
 namespace MyPass.Web.Controllers
 {
     [AuthFilter]
-    public class GroupController : Controller
+    public class CategoryController : MyPassController
     {
-        private GroupManager _bll = new GroupManager();
+        private CategoryManager _bll = new CategoryManager();
 
         public ActionResult Index()
         {
@@ -23,7 +24,8 @@ namespace MyPass.Web.Controllers
 
         public ActionResult List()
         {
-            List<Group> groups = _bll.FindAll(SessionHelper.GetCurrentUser().Id);
+            int currentUserId = SessionHelper.GetCurrentUser().Id;
+            List<Category> groups = _bll.FindAll(currentUserId);
             return View(groups);
         }
 
@@ -33,18 +35,27 @@ namespace MyPass.Web.Controllers
             if (id != null)
             {
                 int userId = SessionHelper.GetCurrentUser().Id;
-                Group group = _bll.Find((int)id, userId);
-                List<User> groupUserList = _bll.FindGroupUsers((int)id);
-                GroupDetailViewModel model = new GroupDetailViewModel()
+                Category category = _bll.Find((int)id, userId);
+
+                if (category == null)
                 {
-                    Group = group,
-                    SharedGroupUserList = groupUserList,
-                    GroupOwnerName = _bll.FindOwnerEmail((int)id)
+                    return ErrorPage404();
+                }
+
+                ItemManager itemManager = new ItemManager();
+                category.ItemList = itemManager.EncodePasswords(category.ItemList);
+
+                //ViewModel doldurma işlemleri.
+                CategoryDetailViewModel model = new CategoryDetailViewModel()
+                {
+                    Category = category,
+                    SharedCategoryUserList = _bll.GetSharedCategoryUsers(id.Value),
+                    CategoryOwnerName = _bll.GetOwnerUser(id.Value).Email
                 };
                 return View(model);
             }
             else
-                return new HttpStatusCodeResult(400, "Opps");
+                return ErrorPage404();
 
         }
         #endregion
@@ -53,32 +64,32 @@ namespace MyPass.Web.Controllers
 
         public ActionResult Create()
         {
-
-            return View(new Group());
+            return View(new Category());
         }
 
         [HttpPost]
-        public ActionResult Create(Group group)
+        public ActionResult Create(Category category)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                try
                 {
-                    group.OwnerUserId = SessionHelper.GetCurrentUser().Id;
-                    _bll.AddGroup(group);
-                    SessionHelper.RemoveGroups();                      
+                    
+                    int currentUserId = SessionHelper.GetCurrentUser().Id;
 
-                    return RedirectToAction("Detail", "Group", new { id = group.Id });
+                    int categoryId = _bll.Add(category, currentUserId);
+
+                    SessionHelper.RemoveCategories();
+
+                    return RedirectToAction("Detail", "Category", new { id = categoryId });
                 }
-
-                return View(group);
-
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                }
             }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError("", ex.Message);
-                return View(group);
-            }
+
+            return View(category);
         }
 
         #endregion
@@ -90,14 +101,14 @@ namespace MyPass.Web.Controllers
             if (id != null)
             {
                 int userId = SessionHelper.GetCurrentUser().Id;
-                Group group = _bll.Find((int)id, userId);
-                List<User> groupUserList = _bll.FindGroupUsers((int)id);
+                Category group = _bll.Find((int)id, userId);
+                List<User> groupUserList = _bll.GetSharedCategoryUsers((int)id);
 
                 GroupEditViewModel model = new GroupEditViewModel()
                 {
                     Group = group,
                     SharedGroupUserList = groupUserList,
-                    GroupOwnerName = _bll.FindOwnerEmail((int)id)
+                    GroupOwnerName = _bll.GetOwnerUser(id.Value).Email
                 };
 
                 return View(model);
@@ -114,9 +125,9 @@ namespace MyPass.Web.Controllers
             {
                 try
                 {
-                    Group group = model.Group;
+                    Category group = model.Group;
                     _bll.Update(group);
-                    return RedirectToAction("Details", new { id = group.Id });
+                    return RedirectToAction("Detail", new { id = group.Id });
                 }
                 catch (Exception ex)
                 {
@@ -133,8 +144,8 @@ namespace MyPass.Web.Controllers
             List<User> model = new List<User>();
             try
             {
-                _bll.ShareGroup(email, groupId, SessionHelper.GetCurrentUser().Id);
-                model = _bll.FindGroupUsers(groupId);
+                _bll.ShareCategory(email, groupId, SessionHelper.GetCurrentUser().Id);
+                model = _bll.GetAllCategoryUsers(groupId);
 
             }
             catch (Exception ex)
@@ -142,7 +153,7 @@ namespace MyPass.Web.Controllers
                 ModelState.AddModelError("", ex.Message);
             }
 
-            return PartialView("_GroupUserList", model);
+            return PartialView("_CategoryUserList", model);
 
         }
 
@@ -152,8 +163,8 @@ namespace MyPass.Web.Controllers
             List<User> model = new List<User>();
             try
             {
-                _bll.UnShareGroup(userId, groupId, SessionHelper.GetCurrentUser().Id);
-                model = _bll.FindGroupUsers(groupId);
+                _bll.UnShareCategory(userId, groupId, SessionHelper.GetCurrentUser().Id);
+                model = _bll.GetAllCategoryUsers(groupId);
             }
             catch (Exception ex)
             {
@@ -172,10 +183,10 @@ namespace MyPass.Web.Controllers
             {
                 if(id != null)
                 {
-                    _bll.Remove((int)id, SessionHelper.GetCurrentUser().Id);
-                    SessionHelper.RemoveGroups();
-                }
-                    
+                    _bll.Delete((int)id, SessionHelper.GetCurrentUser().Id);
+
+                    SessionHelper.RemoveCategories();
+                }                  
                 else
                     return new HttpStatusCodeResult(400, "Opps");
 

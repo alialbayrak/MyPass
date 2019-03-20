@@ -9,21 +9,25 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MyPass.Entities
 {
-    [Table("Groups")]
-    public class Group : EntityBase
+    [Table("Categories")]
+    public class Category : EntityBase
     {
+        public Category()
+        {
+            this.CategoryUsers = new List<CategoryUser>();
+            this.ItemList = new List<Item>();
+        }
+
         [Display(Name = "Başlık"), Required, StringLength(50)]
         public string Title { get; set; }
 
         [Display(Name = "Açıklama"), DataType(DataType.MultilineText), StringLength(500)]
         public string Description { get; set; }
 
-        [Required]
-        public int OwnerUserId { get; set; }
+        public int? ParentCategoryId { get; set; }
 
         public virtual List<Item> ItemList { get; set; }
-
-        public virtual List<GroupUser> GroupUserList { get; set; }
+        public virtual List<CategoryUser> CategoryUsers { get; set; }
 
     }
 }

@@ -48,12 +48,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IDalBase.cs" />
-    <Compile Include="GroupDal.cs" />
-    <Compile Include="GroupUserDal.cs" />
-    <Compile Include="ItemDal.cs" />
-    <Compile Include="MyPassContext.cs" />
+    <Compile Include="Abstract\IRepository.cs" />
+    <Compile Include="EntityFramework\MyPassContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserDal.cs" />
+    <Compile Include="EntityFramework\Repository.cs" />
+    <Compile Include="EntityFramework\RepositoryBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -65,5 +64,6 @@
       <Name>MyPass.Entities</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

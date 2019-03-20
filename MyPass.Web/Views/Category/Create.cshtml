@@ -1,4 +1,4 @@
-﻿@model MyPass.Entities.Group
+﻿@model MyPass.Entities.Category
 
 @{
     ViewBag.Title = "Grup Ekle";
@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="card-body">
-            @using (Html.BeginForm("Create", "Group"))
+            @using (Html.BeginForm("Create", "Category"))
             {
                 @Html.AntiForgeryToken()
 

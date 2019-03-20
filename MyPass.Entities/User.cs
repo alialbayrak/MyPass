@@ -9,6 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MyPass.Entities
 {
+    [Table("Users")]
     public class User : EntityBase
     {
         [Required, StringLength(25)]
@@ -28,6 +29,7 @@ namespace MyPass.Entities
         [RegularExpression("^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-zA-Z]).{1,}$", ErrorMessage = "Şifreniz en az bir rakam ve bir büyük harf olmalıdır")]
         public string Password { get; set; }
 
-        public virtual List<Group> Groups { get; set; }
+        public virtual List<CategoryUser> CategoryUsers { get; set; }  
+
     }
 }

@@ -30,6 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -42,7 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GroupManager.cs" />
+    <Compile Include="CategoryManager.cs" />
     <Compile Include="Helper\ConfigHelper.cs" />
     <Compile Include="Helper\EmailHelper.cs" />
     <Compile Include="HomeManager.cs" />

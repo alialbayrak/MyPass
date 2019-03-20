@@ -9,19 +9,28 @@ namespace MyPass.Web.Controllers
     public class ErrorController : Controller
     {
 
-        public ActionResult Index()
+        public ActionResult PageError()
         {
-            return View("Page404");
+            Response.TrySkipIisCustomErrors = true;
+            return View();
         }
-
         public ActionResult Page404()
         {
-            return View();
+            Response.StatusCode = 404;
+            Response.TrySkipIisCustomErrors = true;
+            return View("PageError");
         }
-
-        public ActionResult Default()
+        public ActionResult Page403()
         {
-            return View();
+            Response.StatusCode = 403;
+            Response.TrySkipIisCustomErrors = true;
+            return View("PageError");
+        }
+        public ActionResult Page500()
+        {
+            Response.StatusCode = 500;
+            Response.TrySkipIisCustomErrors = true;
+            return View("PageError");
         }
 
     }

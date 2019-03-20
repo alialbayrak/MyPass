@@ -34,7 +34,7 @@ namespace MyPass.Web.Controllers
             {
                 try
                 {
-                    int userId = _bll.RegisterUser(user);
+                    int userId = _bll.Add(user);
 
                     ViewBag.Caption = "Kaydınız Oluşturulmuştur";
                     ViewBag.Message = "Mail adresinizi kontrol edip hesabınızı aktive etmeyi unutmayın!";
@@ -69,7 +69,7 @@ namespace MyPass.Web.Controllers
             {
                 try
                 {
-                    User user = _bll.LoginUser(userLogin.Email, userLogin.Password);
+                    User user = _bll.Login(userLogin.Email, userLogin.Password);
                     if (user != null)
                     {
                         SessionHelper.AddCurrentUser(user);
@@ -112,7 +112,7 @@ namespace MyPass.Web.Controllers
                 ViewBag.Action = "Login";
                 return View("~/Views/Shared/Redirect.cshtml");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 ViewBag.Caption = "Aktivasyon İşlemi Başarısız!";
                 ViewBag.Message = "Opss... bir hata oluştu. aktivasyon linkini tekrar isteyin.";

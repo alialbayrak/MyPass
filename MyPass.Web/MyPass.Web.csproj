@@ -158,9 +158,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
-    <Compile Include="Controllers\GroupController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
+    <Compile Include="Controllers\MyPassController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filter\AuthFilter.cs" />
     <Compile Include="Global.asax.cs">
@@ -267,14 +268,14 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Group\Create.cshtml" />
+    <Content Include="Views\Category\Create.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\Shared\Redirect.cshtml" />
     <Content Include="Views\Home\Dashboard.cshtml" />
-    <Content Include="Views\Group\List.cshtml" />
-    <Content Include="Views\Group\Edit.cshtml" />
-    <Content Include="Views\Group\Detail.cshtml" />
+    <Content Include="Views\Category\List.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
+    <Content Include="Views\Category\Detail.cshtml" />
     <Content Include="Views\Error\Page404.cshtml" />
     <Content Include="Views\User\ForgotPassword.cshtml" />
     <Content Include="Views\User\NewPassword.cshtml" />
@@ -282,13 +283,14 @@
     <Content Include="Views\Item\Details.cshtml" />
     <Content Include="Views\Item\Edit.cshtml" />
     <Content Include="Views\Item\List.cshtml" />
-    <Content Include="Views\Group\_GroupItemList.cshtml" />
-    <Content Include="Views\Group\_GroupUserList.cshtml" />
+    <Content Include="Views\Category\_CategoryItemList.cshtml" />
+    <Content Include="Views\Category\_CategoryUserList.cshtml" />
     <Content Include="Views\Error\Default.cshtml" />
+    <Content Include="Views\Error\PageError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Base\" />
+    <Folder Include="Views\MyPass\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">

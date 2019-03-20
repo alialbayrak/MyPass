@@ -7,23 +7,24 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using MyPass.Bll.Helper;
+using MyPass.Dal.EntityFramework;
 
 namespace MyPass.Bll
 {
     public class UserManager
     {
-        UserDal _dal = new UserDal();
+        private Repository<User> userRepository = new Repository<User>();
 
-        public int RegisterUser(User user)
+        public int Add(User user)
         {
-            if(_dal.GetUserByEmailAdress(user.Email) == null)
+            if(userRepository.Get(m => m.Email == user.Email).FirstOrDefault() == null)
             {
                 string passwordHash = SecurityHelper.GenerateSHA256String(user.Password);
                 user.Password = passwordHash;
 
                 user.IsActive = false;
-                
-                int userId = _dal.Add(user);
+
+                int userId = userRepository.Insert(user);
 
                 SendVerifyAccountEmail(user.Email);
 
@@ -35,11 +36,11 @@ namespace MyPass.Bll
             }
         }
 
-        public User LoginUser(string email, string password)
+        public User Login(string email, string password)
         {
             string passwordHash = SecurityHelper.GenerateSHA256String(password);
 
-            User user = _dal.GetUserbyEmailPassword(email, passwordHash);
+            User user = userRepository.Get(m => m.Email == email && m.Password == passwordHash).FirstOrDefault();
             if (user != null)
             {
                 if (user.IsActive)
@@ -60,7 +61,7 @@ namespace MyPass.Bll
         {
             string appName = ConfigHelper.GetSetting<string>("AppName");
             string siteUrl = ConfigHelper.GetSetting<string>("SiteUrl");
-            User user = _dal.GetUserByEmailAdress(to);
+            User user = userRepository.Get(m => m.Email == to).FirstOrDefault();
             string userIdEnCode = SecurityHelper.Encode(user.Id.ToString());
             string subject = $"{appName} Üyelik Aktivasyonu!";
             string htmlMessage = $"<p>Üyelik kayıt işleminiz gerçekleştirilmiştir. Hesabınızı aktifleştirmek istiyorsanız " +
@@ -73,18 +74,18 @@ namespace MyPass.Bll
         public void ActivateUser(string encodedId)
         {
             int deCodedUserId = Convert.ToInt32(SecurityHelper.Decode(encodedId));
-            User user = _dal.GetById(deCodedUserId);
+            User user = userRepository.GetById(deCodedUserId);
 
             if (user == null)
                 throw new Exception("Kullanıcı bulunamadı");
 
             user.IsActive = true;
-            _dal.Update(user);
+            userRepository.Update(user);
         }
 
         public void ResetPasswordRequest(string email)
         {
-            User user = _dal.GetUserByEmailAdress(email);
+            User user = userRepository.Get(m=> m.Email == email).FirstOrDefault();
 
             if (user == null)
                 throw new Exception("Kullanıcı bulunamadı!");
@@ -93,8 +94,7 @@ namespace MyPass.Bll
                 throw new Exception("Şifrenizi sıfırlamak için hesabınızı aktif etmeniz gerekmektedir!");
 
             user.PasswordResetExpiryDate = DateTime.Now.AddHours(1);
-
-            if(_dal.Update(user) > 0)
+            if (userRepository.Update(user) > 0)
             {
                 SendResetPasswordEmail(user.Email);
             }
@@ -107,7 +107,7 @@ namespace MyPass.Bll
         {
             string appName = ConfigHelper.GetSetting<string>("AppName");
             string siteUrl = ConfigHelper.GetSetting<string>("SiteUrl");
-            User user = _dal.GetUserByEmailAdress(to);
+            User user = userRepository.Get(m => m.Email == to).FirstOrDefault();
             string userIdEnCode = SecurityHelper.Encode(user.Id.ToString());
             string subject = $"{appName} - Şifre Sıfırlama!";
             string htmlMessage = $"<p>Şifre sıfırlamak için " +
@@ -120,7 +120,7 @@ namespace MyPass.Bll
         public void ResetPassword(string encodedId, string newPassword)
         {
             int deCodedUserId = Convert.ToInt32(SecurityHelper.Decode(encodedId));
-            User user = _dal.GetById(deCodedUserId);
+            User user = userRepository.GetById(deCodedUserId);
 
             if (user == null)
                 throw new Exception("Kullanıcı bulunamadı!");
@@ -139,7 +139,7 @@ namespace MyPass.Bll
             user.Password = passHash;
             user.PasswordResetExpiryDate = null;
 
-            _dal.Update(user);
+            userRepository.Update(user);
         }
     }
 }
