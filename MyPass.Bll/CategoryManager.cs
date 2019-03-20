@@ -133,12 +133,12 @@ namespace MyPass.Bll
         public void UnShareCategory(int userId, int categoryId, int currentUserId) //userId çıkarılacak olan
         {
             CategoryUser categoryUser = categoryUserRepository.Get(m => m.UserId == userId && m.CategoryId == categoryId).FirstOrDefault();
-            CategoryUser owner = categoryUserRepository.Get(m => m.UserId == userId && m.CategoryId == currentUserId).FirstOrDefault();
+            CategoryUser owner = categoryUserRepository.Get(m => m.UserId == currentUserId && m.CategoryId == categoryId).FirstOrDefault();
 
             if (categoryUser == null)
                 throw new Exception("Kullanıcı bulunamadı!");
 
-            if (owner.IsOwner)
+            if (!owner.IsOwner)
                 throw new Exception("Kategori sahibi değilsiniz!");
 
             categoryUserRepository.Delete(categoryUser);
@@ -146,7 +146,7 @@ namespace MyPass.Bll
 
         public List<User> GetSharedCategoryUsers(int categoryId) // kategori paylaşılmış kişiler
         {
-            List<int> userIds = categoryUserRepository.Get(m => m.CategoryId == categoryId && m.IsOwner == false).Select(m => m.UserId).ToList();
+            List<int> userIds = categoryUserRepository.Get(m => m.CategoryId == categoryId && m.IsOwner == false && m.Status == true).Select(m => m.UserId).ToList();
             return userRepository.Get(m => userIds.Contains(m.Id));
         }
 

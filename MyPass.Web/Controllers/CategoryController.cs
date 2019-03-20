@@ -145,7 +145,7 @@ namespace MyPass.Web.Controllers
             try
             {
                 _bll.ShareCategory(email, groupId, SessionHelper.GetCurrentUser().Id);
-                model = _bll.GetAllCategoryUsers(groupId);
+                model = _bll.GetSharedCategoryUsers(groupId);
 
             }
             catch (Exception ex)
@@ -164,14 +164,14 @@ namespace MyPass.Web.Controllers
             try
             {
                 _bll.UnShareCategory(userId, groupId, SessionHelper.GetCurrentUser().Id);
-                model = _bll.GetAllCategoryUsers(groupId);
+                model = _bll.GetSharedCategoryUsers(groupId);
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
             }
 
-            return PartialView("_GroupUserList", model);
+            return PartialView("_CategoryUserList", model);
 
         }
 
