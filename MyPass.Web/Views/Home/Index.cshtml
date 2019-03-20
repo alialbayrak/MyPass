@@ -1,31 +1,499 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿<!DOCTPYE html>
+@{ 
+
+    Layout = null;
+
+
 }
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+    <!-- awesone fonts css-->
+    <link href="~/Content/font-awesome.css" rel="stylesheet" type="text/css">
+    <!-- owl carousel css-->
+    <link rel="stylesheet" href="~/Scripts/owl-carousel/assets/owl.carousel.min.css" type="text/css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css">
+    <!-- custom CSS -->
+    <link rel="stylesheet" href="~/Content/style.css">
+    <title>MyPass</title>
+    <style>
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light bg-transparent" id="gtco-main-nav">
+        <div class="container">
+            <a class="navbar-brand">MyPass</a>
+            <button class="navbar-toggler" data-target="#my-nav" onclick="myFunction(this)" data-toggle="collapse">
+                <span class="bar1"></span> <span class="bar2"></span> <span class="bar3"></span>
+            </button>
+            <div id="my-nav" class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Ana Sayfa</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Çözümlerimiz</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">Hakkımızda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">İletişim</a></li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <a href="@Url.Action("Login","User")" class="btn btn-outline-dark my-2 my-sm-0 mr-3 text-uppercase">Giriş</a>
+                    <a href="@Url.Action("Register","User")" class="btn btn-info my-2 my-sm-0 text-uppercase">Kayıt Ol</a>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid gtco-banner-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1>
+                        Veri güvenliğiniz için
+                        en iyi çözümü <span>MyPass</span> olarak sağlamaktayız.
+                    </h1>
+                    <p> Şifrelerinizi bit şifreleme algoritması ile güvenle saklayıp, tekrar kullanabilirsiniz. </p>
+                    <a href="#">Daha fazla bilgi <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                </div>
+                <div class="col-md-6">
+                    <div class="card"><img class="card-img-top img-fluid" src="~/Images/banner-img.png" alt=""></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid gtco-feature" id="services">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="cover">
+                        <div class="card">
+                            <svg class="back-bg"
+                                 width="100%" viewBox="0 0 900 700" style="position:absolute; z-index: -1">
+                                <defs>
+                                    <linearGradient id="PSgrad_01" x1="64.279%" x2="0%" y1="76.604%" y2="0%">
+                                        <stop offset="0%" stop-color="rgb(1,230,248)" stop-opacity="1" />
+                                        <stop offset="100%" stop-color="rgb(29,62,222)" stop-opacity="1" />
+                                    </linearGradient>
+                                </defs>
+                                <path fill-rule="evenodd" opacity="0.102" fill="url(#PSgrad_01)"
+                                      d="M616.656,2.494 L89.351,98.948 C19.867,111.658 -16.508,176.639 7.408,240.130 L122.755,546.348 C141.761,596.806 203.597,623.407 259.843,609.597 L697.535,502.126 C748.221,489.680 783.967,441.432 777.751,392.742 L739.837,95.775 C732.096,35.145 677.715,-8.675 616.656,2.494 Z" />
+                            </svg>
+                            <!-- *************-->
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+                            <svg width="100%" viewBox="0 0 700 500">
+                                <clipPath id="clip-path">
+                                    <path d="M89.479,0.180 L512.635,25.932 C568.395,29.326 603.115,76.927 590.357,129.078 L528.827,380.603 C518.688,422.048 472.661,448.814 427.190,443.300 L73.350,400.391 C32.374,395.422 -0.267,360.907 -0.002,322.064 L1.609,85.154 C1.938,36.786 40.481,-2.801 89.479,0.180 Z"></path>
+                                </clipPath>
+                                <!-- xlink:href for modern browsers, src for IE8- -->
+                                <image clip-path="url(#clip-path)" xlink:href="~/Images/learn-img.png" width="100%"
+                                       height="465" class="svg__image"></image>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <h2> SHA-256 bit Şifreleme algoritması ile </h2>
+                    <p> Verilerinizi ve Hesap Şifrelerinizi güvenle saklayabilirsiniz. </p>
+                    <p>
+                        <small>
+                            Sosyal ağ şifreleriniz, Kredi kartınız yada herhangi bir hesabınızın şifresi tüm bunlar için kullanabileceğiniz güvenli bir platform MyPass.
+                        </small>
+                    </p>
+                    <a href="#">Daha Fazla <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    <div class="container-fluid gtco-features" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <h2>
+                        Size sunduklarımıza<br />
+                        Bir göz atalım
+                    </h2>
+                    <p>
+                        MyPass uygulaması sizlere temiz ve kolay kullanıma sahip bir arayüz sunmaktadır. Kullanıcı ile birebir etkilişime sahip arayüzde ihtiyacınız olan
+                        şeylere erişmek çok kolay ve basit.
+                    </p>
+                    <a href="#">Servislerimiz <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                </div>
+                <div class="col-lg-8">
+                    <svg id="bg-services"
+                         width="100%"
+                         viewBox="0 0 1000 800">
+                        <defs>
+                            <linearGradient id="PSgrad_02" x1="64.279%" x2="0%" y1="76.604%" y2="0%">
+                                <stop offset="0%" stop-color="rgb(1,230,248)" stop-opacity="1" />
+                                <stop offset="100%" stop-color="rgb(29,62,222)" stop-opacity="1" />
+                            </linearGradient>
+                        </defs>
+                        <path fill-rule="evenodd" opacity="0.102" fill="url(#PSgrad_02)"
+                              d="M801.878,3.146 L116.381,128.537 C26.052,145.060 -21.235,229.535 9.856,312.073 L159.806,710.157 C184.515,775.753 264.901,810.334 338.020,792.380 L907.021,652.668 C972.912,636.489 1019.383,573.766 1011.301,510.470 L962.013,124.412 C951.950,45.594 881.254,-11.373 801.878,3.146 Z" />
+                    </svg>
+                    <div class="row">
+                        <div class="col">
+                            <div class="card text-center">
+                                <div class="oval"><img class="card-img-top" src="~/Images/web-design.png" alt=""></div>
+                                <div class="card-body">
+                                    <h3 class="card-title">Arayüz Tasarım</h3>
+                                    <p class="card-text">Özet ekranında yaptığınız son işlemleri ve gruplarınıza erişebilirsiniz.</p>
+                                </div>
+                            </div>
+                            <div class="card text-center">
+                                <div class="oval"><img class="card-img-top" src="~/Images/marketing.png" alt=""></div>
+                                <div class="card-body">
+                                    <h3 class="card-title">Paylaşım</h3>
+                                    <p class="card-text">
+                                        Diğer kullanıcılarla oluşturduğunuz özel istekler ile
+                                        gruplarınızı güvenle paylaşabilirsiniz.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card text-center">
+                                <div class="oval"><img class="card-img-top" src="~/Images/seo.png" alt=""></div>
+                                <div class="card-body">
+                                    <h3 class="card-title">Özellik Girilecek</h3>
+                                    <p class="card-text">Özellik açıklamasını buraya yazacağım...</p>
+                                </div>
+                            </div>
+                            <div class="card text-center">
+                                <div class="oval"><img class="card-img-top" src="~/Images/graphics-design.png" alt=""></div>
+                                <div class="card-body">
+                                    <h3 class="card-title">Güncelleme</h3>
+                                    <p class="card-text">Her gün yeni bir şeyler katmaya devam ediyoruz. Takipte kal!.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    <div class="container-fluid gtco-numbers-block">
+        <div class="container">
+            <svg width="100%" viewBox="0 0 1600 400">
+                <defs>
+                    <linearGradient id="PSgrad_03" x1="80.279%" x2="0%" y2="0%">
+                        <stop offset="0%" stop-color="rgb(1,230,248)" stop-opacity="1" />
+                        <stop offset="100%" stop-color="rgb(29,62,222)" stop-opacity="1" />
+
+                    </linearGradient>
+
+                </defs>
+                <!-- <clipPath id="clip-path3">
+
+                                          </clipPath> -->
+
+                <path fill-rule="evenodd" fill="url(#PSgrad_03)"
+                      d="M98.891,386.002 L1527.942,380.805 C1581.806,380.610 1599.093,335.367 1570.005,284.353 L1480.254,126.948 C1458.704,89.153 1408.314,59.820 1366.025,57.550 L298.504,0.261 C238.784,-2.944 166.619,25.419 138.312,70.265 L16.944,262.546 C-24.214,327.750 12.103,386.317 98.891,386.002 Z"></path>
+
+                <clipPath id="ctm" fill="none">
+                    <path d="M98.891,386.002 L1527.942,380.805 C1581.806,380.610 1599.093,335.367 1570.005,284.353 L1480.254,126.948 C1458.704,89.153 1408.314,59.820 1366.025,57.550 L298.504,0.261 C238.784,-2.944 166.619,25.419 138.312,70.265 L16.944,262.546 C-24.214,327.750 12.103,386.317 98.891,386.002 Z"></path>
+                </clipPath>
+
+                <!-- xlink:href for modern browsers, src for IE8- -->
+                <image clip-path="url(#ctm)" xlink:href="~/Images/word-map.png" height="800px" width="100%" class="svg__image">
+
+                </image>
+
+            </svg>
+            <div class="row">
+                <div class="col-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">1415</h5>
+                            <p class="card-text">Aktif Gruplar</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">210</h5>
+                            <p class="card-text">Oluşturulan Item</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">1250</h5>
+                            <p class="card-text">Paylaşılan Grup Sayısı</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">241</h5>
+                            <p class="card-text">Mutlu Kullanıcılar</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+    <div class="container-fluid gtco-testimonials">
+        <div class="container">
+            <h2>Biz kimiz ve Neler yapıyoruz</h2>
+            <div class="owl-carousel owl-carousel1 owl-theme">
+                <div>
+                    <div class="card text-center">
+                        <img class="card-img-top" src="~/Images/customer1.jpg" alt="">
+                        <div class="card-body">
+                            <h5>
+                                Mehmet Küçük <br />
+                                <span> Project Manager </span>
+                            </h5>
+                            <p class="card-text">“ Merhaba arkadaşlar kanalıma hoşgeldiniz, reklamlara tıklamayı unutmayın. ” </p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="card text-center">
+                        <img class="card-img-top" src="~/Images/customer2.jpg" alt="">
+                        <div class="card-body">
+                            <h5>
+                                Ali Albayrak<br />
+                                <span> Project Manager </span>
+                            </h5>
+                            <p class="card-text">“ Merhaba arkadaşlar kanalıma hoşgeldiniz, reklamlara tıklamayı unutmayın. ” </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid gtco-features-list">
+        <div class="container">
+            <div class="row">
+                <div class="media col-md-6 col-lg-4">
+                    <div class="oval mr-4"><img class="align-self-start" src="~/Images/quality-results.png" alt=""></div>
+                    <div class="media-body">
+                        <h5 class="mb-0">Kalitemiz</h5>
+                        MyPass hizmeti SHA-256 şifreleme algoritması kullanmaktadır, öyle ki bu şifreyi kırmak için milyonlarca saat gerekir ve imkansız.
+                    </div>
+                </div>
+                <div class="media col-md-6 col-lg-4">
+                    <div class="oval mr-4"><img class="align-self-start" src="~/Images/analytics.png" alt=""></div>
+                    <div class="media-body">
+                        <h5 class="mb-0">Analiz</h5>
+                        Dünya'da ve Türkiye'de milyonlarca insan doğum tarihi gibi basit şifreler oluşturmaktadır. Bunların önüne
+                        geçmek ve bu şifreleri güvenle saklamak için artık buradayız.
+                    </div>
+                </div>
+                <div class="media col-md-6 col-lg-4">
+                    <div class="oval mr-4"><img class="align-self-start" src="~/Images/affordable-pricing.png" alt=""></div>
+                    <div class="media-body">
+                        <h5 class="mb-0">Ücretlendirmeler</h5>
+                        MyPass ücretsiz bir hizmettir, bu hizmetten sınırsız olarak hiç bir ücret ödemeden faydalanabilirsiniz.
+                    </div>
+                </div>
+                <div class="media col-md-6 col-lg-4">
+                    <div class="oval mr-4"><img class="align-self-start" src="~/Images/easy-to-use.png" alt=""></div>
+                    <div class="media-body">
+                        <h5 class="mb-0">Kullanımı Kolay</h5>
+                        Arayüzü en basit ve dinamik şekilde sizlere sunduk, aradığınız her şey ekranınızda sizlere
+                        ekstra tıklamalar yapmadan tek bir noktadan ulaşabileceğiniz sayfa hazırladık.
+                    </div>
+                </div>
+                <div class="media col-md-6 col-lg-4">
+                    <div class="oval mr-4"><img class="align-self-start" src="~/Images/free-support.png" alt=""></div>
+                    <div class="media-body">
+                        <h5 class="mb-0">Canlı Destek</h5>
+                        Sorunlarınızı Canlı Destek ile kısa sürede çözüme kavuşturun, 7/24 online olan sistemde sizlere yardımcı
+                        olmaktan mutluluk duyarız.
+                    </div>
+                </div>
+                <div class="media col-md-6 col-lg-4">
+                    <div class="oval mr-4"><img class="align-self-start" src="~/Images/effectively-increase.png" alt=""></div>
+                    <div class="media-body">
+                        <h5 class="mb-0">Neden MyPass</h5>
+                        Hızlı ve Güvenli şifreleme sistemi sayesinde her zaman güvendesiniz.
+                        Şifrelerinize dışarıdan erişim kesinlikle ve kattiyen imkansız, güvenliğiniz bizim için herşeyden önce gelmektedir.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid gtco-logo-area">
+        <div class="container">
+            <div class="row">
+                <div class="col"><img src="~/Images/logo1.png" class="img-fluid" alt=""></div>
+                <div class="col"><img src="~/Images/logo2.png" class="img-fluid" alt=""></div>
+                <div class="col"><img src="~/Images/logo3.png" class="img-fluid" alt=""></div>
+                <div class="col"><img src="~/Images/logo4.png" class="img-fluid" alt=""></div>
+                <div class="col"><img src="~/Images/logo5.png" class="img-fluid" alt=""></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid gtco-news" id="news">
+        <div class="container">
+            <h2>Güncellemeler & Makaleler</h2>
+            <div class="owl-carousel owl-carousel2 owl-theme">
+                <div>
+                    <div class="card text-center">
+                        <img class="card-img-top" src="~/Images/news1.jpg" alt="">
+                        <div class="card-body text-left pr-0 pl-0">
+                            <h5>Random Bir Şeyler Yazılmıştır</h5>
+                            <p class="card-text">
+                                Daha Sonra Doldurulmak Üzere Random Bir Şeyler Yazılmıştır
+                                Buradaki Textlerin Hiç bir anlamı yoktur. . . .
+                                . . .
+                            </p>
+                            <a href="#">Daha Fazlası <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="card text-center">
+                        <img class="card-img-top" src="~/Images/news2.jpg" alt="">
+                        <div class="card-body text-left pr-0 pl-0">
+                            <h5> Random Bir Şeyler Yazılmıştır</h5>
+                            <p class="card-text">
+                                Daha Sonra Doldurulmak Üzere Random Bir Şeyler Yazılmıştır
+                                Buradaki Textlerin Hiç bir anlamı yoktur. . . .
+                            </p>
+                            <a href="#">Daha Fazlası <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="card text-center">
+                        <img class="card-img-top" src="~/Images/news3.jpg" alt="">
+                        <div class="card-body text-left pr-0 pl-0">
+                            <h5>Random Bir Şeyler Yazılmıştır</h5>
+                            <p class="card-text">
+                                Daha Sonra Doldurulmak Üzere Random Bir Şeyler Yazılmıştır
+                                Buradaki Textlerin Hiç bir anlamı yoktur. . . .
+                            </p>
+                            <a href="#">Daha Fazlası <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="card text-center">
+                        <img class="card-img-top" src="~/Images/news1.jpg" alt="">
+                        <div class="card-body text-left pr-0 pl-0">
+                            <h5>Random Bir Şeyler Yazılmıştır</h5>
+                            <p class="card-text">
+                                Daha Sonra Doldurulmak Üzere Random Bir Şeyler Yazılmıştır
+                                Buradaki Textlerin Hiç bir anlamı yoktur. . . .
+                            </p>
+                            <a href="#">Daha Fazlası <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="card text-center">
+                        <img class="card-img-top" src="~/Images/news2.jpg" alt="">
+                        <div class="card-body text-left pr-0 pl-0">
+                            <h5> Random Bir Şeyler Yazılmıştır </h5>
+                            <p class="card-text">
+                                Daha Sonra Doldurulmak Üzere Random Bir Şeyler Yazılmıştır
+                                Buradaki Textlerin Hiç bir anlamı yoktur. . . .
+                            </p>
+                            <a href="#">Daha Fazlası <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="card text-center">
+                        <img class="card-img-top" src="~/Images/news3.jpg" alt="">
+                        <div class="card-body text-left pr-0 pl-0">
+                            <h5>Random Bir Şeyler Yazılmıştır </h5>
+                            <p class="card-text">
+                                Daha Sonra Doldurulmak Üzere Random Bir Şeyler Yazılmıştır
+                                Buradaki Textlerin Hiç bir anlamı yoktur. . . .
+                            </p>
+                            <a href="#">Daha Fazlası <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    -->
+    <footer class="container-fluid" id="gtco-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6" id="contact">
+                    <h4> Bizimle İletişime Geçin </h4>
+                    <input type="text" class="form-control" placeholder="Ad Soyad">
+                    <input type="email" class="form-control" placeholder="Email Adresi">
+                    <textarea class="form-control" placeholder="Mesajınız"></textarea>
+                    <a href="#" class="submit-button">Gönder <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-6">
+                            <h4>MyPass</h4>
+                            <ul class="nav flex-column company-nav">
+                                <li class="nav-item"><a class="nav-link" href="#">Ana Sayfa</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#">Çözümlerimiz</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#">Hakkımızda</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#">Yenilikler</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#">İletişim</a></li>
+                            </ul>
+                            <h4 class="mt-5">Bizi Takip Edin</h4>
+                            <ul class="nav follow-us-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link pl-0" href="#">
+                                        <i class="fa fa-facebook"
+                                           aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">
+                                        <i class="fa fa-twitter"
+                                           aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">
+                                        <i class="fa fa-google"
+                                           aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">
+                                        <i class="fa fa-linkedin"
+                                           aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-6">
+                            <h4>Size Özel</h4>
+                            <ul class="nav flex-column services-nav">
+                                <li class="nav-item"><a class="nav-link" href="#">Verileri Şifreleme</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#">Hesap Şifrelerini Saklama</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#">Güvenle Şifre Paylaşımı</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#">Kolay Erişim</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#">Basit Arayüz</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="col-12">
+                            <p>&copy; 2019. All Rights Reserved. Design by <a href="https://mypass.com" target="_blank">MyPass via Mehmet Küçük</a>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="~/Scripts/jquery-3.3.1.slim.min.js"></script>
+    <script src="~/Scripts/popper.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <!-- owl carousel js-->
+    <script src="~/Scripts/owl-carousel/owl.carousel.min.js"></script>
+    <script src="~/Scripts/main.js"></script>
+</body>
+</html>
