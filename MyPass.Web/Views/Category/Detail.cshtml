@@ -1,4 +1,4 @@
-﻿@model MyPass.Entities.ViewModel.GroupDetailViewModel
+﻿@model MyPass.Entities.ViewModel.CategoryDetailViewModel
 
 @{
     ViewBag.Title = "Grup Detayı";
@@ -10,8 +10,12 @@
                 <h5>@ViewBag.Title</h5>
             </div>
             <div>
-                <span>@Html.ActionLink("Düzenle", "Edit", new { id = Model.Group.Id }, new { @class = "btn btn-info" })</span>
+                <span>
+                    @Html.ActionLink("Sil", "Delete", "Category", new { id = Model.Category.Id }, new { @class = "btn btn-danger", onClick = "return confirm('Kategoriyi silmek istediğinize emin misiniz?')" })
+                </span>
+                <span>@Html.ActionLink("Düzenle", "Edit", new { id = Model.Category.Id }, new { @class = "btn btn-info" })</span>
                 <span>@Html.ActionLink("Listeye Geri Dön", "List", null, new { @class = "btn btn-warning" })</span>
+
             </div>
 
 
@@ -29,19 +33,19 @@
                     <dl class="dl-horizontal">
 
                         <dt>
-                            @Html.DisplayNameFor(model => model.Group.Title)
+                            @Html.DisplayNameFor(model => model.Category.Title)
                         </dt>
 
                         <dd>
-                            @Html.DisplayFor(model => model.Group.Title)
+                            @Html.DisplayFor(model => model.Category.Title)
                         </dd>
 
                         <dt>
-                            @Html.DisplayNameFor(model => model.Group.Description)
+                            @Html.DisplayNameFor(model => model.Category.Description)
                         </dt>
 
                         <dd>
-                            <p>@Html.TextAreaFor(model => model.Group.Description, 10, 0, new { @class = "form-control", disabled = "", style = "background-color: #fff" })</p>
+                            <p>@Html.TextAreaFor(model => model.Category.Description, 10, 0, new { @class = "form-control", disabled = "", style = "background-color: #fff" })</p>
                         </dd>
 
                     </dl>
@@ -51,9 +55,9 @@
 
             <div class="form-group" id="group-users">
 
-                @Html.Label("Grup Sahibi")
+                @Html.Label("Kategori Sahibi")
                 <div>
-                    @Model.GroupOwnerName
+                    @Model.CategoryOwnerName
                 </div>
 
 
@@ -62,7 +66,7 @@
 
             <div class="form-group" id="group-users">
 
-                @Html.Partial("_GroupUserList", Model.SharedGroupUserList)
+                @Html.Partial("_CategoryUserList", Model.SharedCategoryUserList)
 
             </div>
 
@@ -70,7 +74,7 @@
             <div class="row mb-3">
 
                 <div class="col-md-12">
-                    @Ajax.ActionLink("Madde Ekle", "Create", "Item", new { id = Model.Group.Id }, new AjaxOptions
+                    @Ajax.ActionLink("Madde Ekle", "Create", "Item", new { id = Model.Category.Id }, new AjaxOptions
                     {
                         UpdateTargetId = "item",
                         InsertionMode = InsertionMode.Replace,
@@ -94,7 +98,7 @@
 
         </div>
         <div id="item-list" class="card-footer">
-            @Html.Partial("_GroupItemList", Model.Group)
+            @Html.Partial("_CategoryItemList", Model.Category)
         </div>
     </div>
 </div>
@@ -127,12 +131,12 @@
     }
 
     function toAddDiv() {
-        document.getElementById("item").scrollIntoView({ block: "center", behavior: "smooth" });
+        document.getElementById("item").scrollIntoView({ block: "nearest", behavior: "smooth" });
     }
 
     function UnShare(userId) {
         if (confirm('kullanıcıyı silmek istediğinize emin misiniz?')) {
-            let groupId = @Model.Group.Id;
+            let groupId = @Model.Category.Id;
 
             $.ajax({
                 method: "POST",

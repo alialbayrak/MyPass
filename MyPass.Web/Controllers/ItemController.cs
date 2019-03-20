@@ -12,7 +12,7 @@ using System.Web.Mvc;
 namespace MyPass.Web.Controllers
 {
     [AuthFilter]
-    public class ItemController : Controller
+    public class ItemController : MyPassController
     {
         private ItemManager _bll = new ItemManager();
 
@@ -21,12 +21,25 @@ namespace MyPass.Web.Controllers
             return View();
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            int userId = SessionHelper.GetCurrentUser().Id;
-            Item item = _bll.FindItem(id, userId);
-            item.Password = SecurityHelper.Decode(item.Password);
-            return View(item);
+            if (id != null)
+            {
+               
+                int userId = SessionHelper.GetCurrentUser().Id;
+                Item item = _bll.Find(id.Value, userId);
+
+                if (item == null)
+                {
+                    return ErrorPage404();
+                }
+
+                item.Password = _bll.DecodePassword(item.Password);
+                return View(item);
+
+            }
+
+            return ErrorPage404();
         }
 
         [HttpPost, ValidateAntiForgeryToken]
@@ -36,8 +49,8 @@ namespace MyPass.Web.Controllers
             {
                 try
                 {
-                    _bll.UpdateItem(item);
-                    return RedirectToAction("Details", "Group", new { id = item.GroupId });
+                    _bll.Update(item);
+                    return RedirectToAction("Detail", "Category", new { id = item.CategoryId });
                 }
                 catch (Exception ex)
                 {
@@ -49,9 +62,9 @@ namespace MyPass.Web.Controllers
             return View(item);
         }
 
-        public PartialViewResult Create(int id) 
+        public PartialViewResult Create(int id)
         {
-            Item item = new Item { GroupId = id, ItemTypeId = Item.ItemType.Password };
+            Item item = new Item { CategoryId = id };
             try
             {
                 return PartialView("Create", item);
@@ -69,15 +82,16 @@ namespace MyPass.Web.Controllers
             {
                 try
                 {
-                    _bll.AddItem(item);
-                    GroupManager groupManager = new GroupManager();
-                    Group group = groupManager.Find(item.GroupId, SessionHelper.GetCurrentUser().Id);
-                    SessionHelper.RemoveGroups();
-                    return PartialView("~/Views/Group/_GroupItemList.cshtml", group);
+                    _bll.Add(item);
+                    Category group = new CategoryManager().Find(item.CategoryId, SessionHelper.GetCurrentUser().Id);
+                    //item.Password = _bll.DecodePassword(item.Password);
+                    DecodeGroupItemsPassword(group); // grup içindeki şifreleri decode ediyor.
+                    SessionHelper.RemoveCategories();
+                    return PartialView("~/Views/Category/_CategoryItemList.cshtml", group);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    ModelState.AddModelError("",ex.Message);
+                    ModelState.AddModelError("", ex.Message);
                     return PartialView("Create", item);
                 }
             }
@@ -86,9 +100,41 @@ namespace MyPass.Web.Controllers
 
         }
 
+        public Category DecodeGroupItemsPassword(Category group)
+        {
+            foreach (var item in group.ItemList)
+            {
+                item.Password = _bll.DecodePassword(item.Password);
+            }
+
+            return group;
+        } //gönderilen grubun içindeki maddelerin şifrelerini decode ediyor.
+
         public string CopyPassword(int id)
         {
             return _bll.FindPassword(id);
         }
+
+        public ActionResult Delete(int? id)
+        {
+            int groupId = 0;
+            try
+            {
+                if (id != null)
+                {
+                    groupId = _bll.Delete(id.Value, SessionHelper.GetCurrentUser().Id);
+                    SessionHelper.RemoveCategories();
+                }
+                else
+                    return new HttpStatusCodeResult(400, "Opps");
+
+                return RedirectToAction("Detail", "Category", new { id = groupId });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
     }
 }

@@ -8,7 +8,7 @@ namespace MyPass.Entities.ViewModel
 {
     public class GroupEditViewModel
     {
-        public Group Group { get; set; }
+        public Category Group { get; set; }
         public List<User> SharedGroupUserList { get; set; }
 
         public string GroupOwnerName { get; set; }

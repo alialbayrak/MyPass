@@ -42,15 +42,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dashboard.cs" />
     <Compile Include="EntityBase.cs" />
-    <Compile Include="Group.cs" />
-    <Compile Include="GroupUser.cs" />
+    <Compile Include="Category.cs" />
+    <Compile Include="CategoryUser.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />
     <Compile Include="ViewModel\ForgotPasswordViewModel.cs" />
-    <Compile Include="ViewModel\GroupDetailViewModel.cs" />
+    <Compile Include="ViewModel\CategoryDetailViewModel.cs" />
     <Compile Include="ViewModel\GroupEditViewModel.cs" />
     <Compile Include="ViewModel\GroupUserViewModel.cs" />
     <Compile Include="ViewModel\NewPasswordViewModel.cs" />
