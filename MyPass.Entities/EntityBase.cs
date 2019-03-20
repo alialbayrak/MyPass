@@ -19,7 +19,7 @@ namespace MyPass.Entities
         [Display(Name = "Güncellenme Tarihi"), DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public DateTime? ModifiedOn { get; set; }
 
-        [Display(Name = "Düzenleyen Kullanıcı")]
+        [Display(Name = "Düzenleyen Kullanıcı"), Column(TypeName = "varchar"), StringLength(50)]
         public string ModifiedUserEmail { get; set; }
 
         [Required]

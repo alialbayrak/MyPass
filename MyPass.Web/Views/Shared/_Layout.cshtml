@@ -20,7 +20,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body onload="onload()">
+<body>
 
     <nav class="d-flex navbar navbar-expand-lg border-bottom-dark position-fixed col-md-12" style="background-color:#538fd0; border: 1px solid #363f46;z-index: 99;">
         <div class="navbar-brand mr-0 col-md-2 col-xl-3 col-6">
@@ -152,14 +152,6 @@
             $("#group-list").toggleClass("d-none");
         });
 
-
-        function onload() {
-
-            if (pageTitle == "Home Page") {
-                $("#content").toggleClass("offset-md-3 offset-lg-2");
-            }
-
-        }
     </script>
 
 

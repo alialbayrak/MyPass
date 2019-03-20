@@ -12,13 +12,13 @@ namespace MyPass.Entities
     [Table("Users")]
     public class User : EntityBase
     {
-        [Required, StringLength(25)]
+        [Required, Column(TypeName = "varchar"), StringLength(25)]
         public string Name { get; set; }
 
-        [Required, StringLength(25)]
+        [Required, Column(TypeName = "varchar"), StringLength(25)]
         public string Surname { get; set; }
 
-        [Required, EmailAddress, DataType(DataType.EmailAddress)]
+        [Required, EmailAddress, DataType(DataType.EmailAddress), Column(TypeName = "varchar"), StringLength(50)]
         public string Email { get; set; }
 
         public bool IsActive { get; set; }
@@ -27,6 +27,7 @@ namespace MyPass.Entities
 
         [Display(Name = "Şifre"), Required, DataType(DataType.Password), MinLength(8, ErrorMessage = "Şifreniz en az 8 karakter olmalıdır!")]
         [RegularExpression("^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-zA-Z]).{1,}$", ErrorMessage = "Şifreniz en az bir rakam ve bir büyük harf olmalıdır")]
+        [Column(TypeName = "varchar"), StringLength(64)]
         public string Password { get; set; }
 
         public virtual List<CategoryUser> CategoryUsers { get; set; }  

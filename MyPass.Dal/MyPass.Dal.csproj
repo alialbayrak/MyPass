@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Abstract\IDalBase.cs" />
     <Compile Include="Abstract\IRepository.cs" />
+    <Compile Include="EntityFramework\Initializer.cs" />
     <Compile Include="EntityFramework\MyPassContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EntityFramework\Repository.cs" />

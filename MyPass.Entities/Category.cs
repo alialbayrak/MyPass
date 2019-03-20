@@ -18,10 +18,10 @@ namespace MyPass.Entities
             this.ItemList = new List<Item>();
         }
 
-        [Display(Name = "Başlık"), Required, StringLength(50)]
+        [Display(Name = "Başlık"), Required, Column(TypeName = "varchar"), StringLength(50)]
         public string Title { get; set; }
 
-        [Display(Name = "Açıklama"), DataType(DataType.MultilineText), StringLength(500)]
+        [Display(Name = "Açıklama"), DataType(DataType.MultilineText), Column(TypeName = "varchar"), StringLength(500)]
         public string Description { get; set; }
 
         public int? ParentCategoryId { get; set; }

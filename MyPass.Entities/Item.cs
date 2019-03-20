@@ -15,14 +15,16 @@ namespace MyPass.Entities
         [Display(Name = "Başlık"), Required, StringLength(50)]
         public string Title { get; set; }
 
-        [Display(Name = "Açıklama"), DataType(DataType.MultilineText), StringLength(500)]
+        [Display(Name = "Açıklama"), DataType(DataType.MultilineText), Column(TypeName = "varchar")]
         public string Nodes { get; set; }
 
+        [Display(Name = "URL"), Column(TypeName = "varchar")]
         public string Url { get; set; }
 
+        [Display(Name = "URL"), Column(TypeName = "varchar"), StringLength(50)]
         public string Username { get; set; }
 
-        [Display(Name = "Şifre"), Required, StringLength(100)]
+        [Display(Name = "Şifre"), Required, Column(TypeName = "varchar"), StringLength(100)]
         public string Password { get; set; }
 
         [Required]
