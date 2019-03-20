@@ -179,10 +179,12 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\style.css" />
     <Content Include="Content\template.css" />
     <Content Include="Content\template.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\fontawesome-webfont78ce.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="ApplicationInsights.config">
@@ -190,6 +192,7 @@
     </Content>
     <Content Include="Images\login.png" />
     <Content Include="Images\register.png" />
+    <Content Include="Images\learn-img.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -217,6 +220,18 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont78ce.eot" />
+    <Content Include="fonts\fontawesome-webfont78ce.ttf" />
+    <Content Include="fonts\Lato-Black.ttf" />
+    <Content Include="fonts\Lato-Bold.ttf" />
+    <Content Include="fonts\Lato-Light.ttf" />
+    <Content Include="fonts\Lato-Medium.ttf" />
+    <Content Include="fonts\Lato-Regular.ttf" />
+    <Content Include="fonts\Lato-Semibold.ttf" />
+    <Content Include="fonts\OpenSans-Bold.ttf" />
+    <Content Include="fonts\OpenSans-Regular.ttf" />
+    <Content Include="fonts\OpenSans-Semibold.ttf" />
+    <Content Include="Content\style.css.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -231,6 +246,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\MyPassCommon.js" />
     <Content Include="Scripts\popper-utils.js" />
@@ -245,7 +261,42 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Images\affordable-pricing.png" />
+    <Content Include="Images\analytics.png" />
+    <Content Include="Images\banner-img.png" />
+    <Content Include="Images\customer1.jpg" />
+    <Content Include="Images\customer2.jpg" />
+    <Content Include="Images\easy-to-use.png" />
+    <Content Include="Images\effectively-increase.png" />
+    <Content Include="Images\free-support.png" />
+    <Content Include="Images\graphics-design.png" />
+    <Content Include="Images\1learn-img.png" />
+    <Content Include="Images\logo1.png" />
+    <Content Include="Images\logo2.png" />
+    <Content Include="Images\logo3.png" />
+    <Content Include="Images\logo4.png" />
+    <Content Include="Images\logo5.png" />
+    <Content Include="Images\map.png" />
+    <Content Include="Images\marketing.png" />
+    <Content Include="Images\news1.jpg" />
+    <Content Include="Images\news2.jpg" />
+    <Content Include="Images\news3.jpg" />
+    <Content Include="Images\overlay.png" />
+    <Content Include="Images\quality-results.png" />
+    <Content Include="Images\seo.png" />
+    <Content Include="Images\web-design.png" />
+    <Content Include="Images\word-map.png" />
+    <Content Include="Scripts\owl-carousel\assets\ajax-loader.gif" />
+    <Content Include="Scripts\owl-carousel\assets\owl.carousel.css" />
+    <Content Include="Scripts\owl-carousel\assets\owl.carousel.min.css" />
+    <Content Include="Scripts\owl-carousel\assets\owl.theme.default.css" />
+    <Content Include="Scripts\owl-carousel\assets\owl.theme.default.min.css" />
+    <Content Include="Scripts\owl-carousel\assets\owl.theme.green.css" />
+    <Content Include="Scripts\owl-carousel\assets\owl.theme.green.min.css" />
+    <Content Include="Scripts\owl-carousel\assets\owl.video.play.png" />
+    <Content Include="Scripts\owl-carousel\owl.carousel.min.js" />
     <Content Include="Web.config">
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
