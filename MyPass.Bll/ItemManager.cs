@@ -24,9 +24,9 @@ namespace MyPass.Bll
             int count = categoryUserRepository.Get(m => m.CategoryId == item.CategoryId && m.UserId == currentUserId).Count;
 
             if (count > 0)
-                return null;
+                return item;
 
-            return item;
+            return null;
         }
 
         public int Add(Item item)
