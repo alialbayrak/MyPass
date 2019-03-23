@@ -42,9 +42,13 @@
 
                     foreach (var group in Model)
                     {
-                        if (group.Description != null && group.Description.Length > 120)
+                        if (group.Title != null && group.Title.Length > 15)
                         {
-                            group.Description = group.Description.Substring(0, 120) + "...";
+                            group.Title = group.Title.Substring(0, 15) + "...";
+                        }
+                        if (group.Description != null && group.Description.Length > 40)
+                        {
+                            group.Description = group.Description.Substring(0, 40) + "...";
                         }
                         <tr>
                             <td>

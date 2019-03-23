@@ -100,6 +100,10 @@
                             <div>
                                 <a class="pl-4 pr-5 pt-1 pb-1 mypass-sidebar-item border-top-0 d-flex text-white align-items-center" href="@Url.Action("Detail","Category", new { id=group.Id })">
                                     <div><i class="fa fa-hashtag"></i></div>
+                                    @if (group.Title != null && group.Title.Length > 15)
+                                    {
+                                        group.Title = group.Title.Substring(0, 15) + "...";
+                                    }
                                     <div class="flex-grow-1 ml-3 mr-1">@group.Title</div>
                                     <span class="badge badge-light badge-pi ll">@group.ItemList.Count</span>
                                 </a>

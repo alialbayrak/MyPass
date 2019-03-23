@@ -27,6 +27,26 @@
                             <li class="list-group-item">
                                 <div class="row">
                                     <div class="col-md-2">
+                                        <b>Kullanıcı Adı: </b>
+                                    </div>
+                                    <div class="col-md-10">
+                                        @item.Username
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <b>Url: </b>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <a href="http://@item.Url" target="_blank">@item.Url</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-md-2">
                                         <b>Açıklama: </b>
                                     </div>
                                     <div class="col-md-10">
@@ -67,8 +87,7 @@
                                         <b>Eklenme Tarihi: </b>
                                     </div>
                                     <div class="col-md-10">
-                                        @item.ModifiedOn
-
+                                        @item.CreatedOn
                                     </div>
                                 </div>
                             </li>

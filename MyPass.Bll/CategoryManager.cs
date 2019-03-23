@@ -27,6 +27,8 @@ namespace MyPass.Bll
             if (category != null)
             {
                 category = category.CategoryUsers.Where(m => m.UserId == currentUserId && m.Status == true).Select(m => m.Category).FirstOrDefault();
+
+                category.ItemList = category.ItemList.Where(m => m.Status == true).ToList();
             }
 
             return category;

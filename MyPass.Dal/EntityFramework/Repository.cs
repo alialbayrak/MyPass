@@ -81,7 +81,7 @@ namespace MyPass.Dal.EntityFramework
             if (entity is EntityBase)
             {
                 EntityBase o = entity as EntityBase;
-
+                o.ModifiedOn = DateTime.Now;
                 context.Entry(o).State = EntityState.Modified;
                 context.Entry(o).Property(x => x.CreatedOn).IsModified = false;
                 context.Entry(o).Property(x => x.Status).IsModified = false;
