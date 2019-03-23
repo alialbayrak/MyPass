@@ -21,9 +21,10 @@
 
         </div>
         <div class="card-body">
-            <table class="table table-bordered">
-                @if (Model != null)
-                {
+
+            @if (Model != null && Model.Count() > 0)
+            {
+                <table class="table table-bordered">
                     <tr>
                         <th>
                             @Html.DisplayNameFor(model => model.Title)
@@ -40,39 +41,43 @@
                         <th></th>
                     </tr>
 
-                    foreach (var group in Model)
+                    @foreach (var group in Model)
                     {
-                        if (group.Title != null && group.Title.Length > 15)
-                        {
-                            group.Title = group.Title.Substring(0, 15) + "...";
-                        }
-                        if (group.Description != null && group.Description.Length > 40)
-                        {
-                            group.Description = group.Description.Substring(0, 40) + "...";
-                        }
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => group.Title)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => group.Description)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => group.CreatedOn)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => group.ModifiedOn)
-                            </td>
-                            <td class="text-center">
-                                @Html.ActionLink("Detay", "Detail", new { id = group.Id }, new { @class = "btn btn-info btn-sm" })
-                            </td>
-                        </tr>
+                    if (group.Title != null && group.Title.Length > 15)
+                    {
+                    group.Title = group.Title.Substring(0, 15) + "...";
                     }
+                    if (group.Description != null && group.Description.Length > 40)
+                    {
+                    group.Description = group.Description.Substring(0, 40) + "...";
+                    }
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => group.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => group.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => group.CreatedOn)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => group.ModifiedOn)
+                        </td>
+                        <td class="text-center">
+                            @Html.ActionLink("Detay", "Detail", new { id = group.Id }, new { @class = "btn btn-info btn-sm" })
+                        </td>
+                    </tr>
+                    }
+                </table>
+            }
+            else
+            {
+                <center><p>Hiç kategoriniz bulunmuyor... :(</p></center>
+            }
 
-                }
 
 
-            </table>
         </div>
     </div>
 </div>
