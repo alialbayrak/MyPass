@@ -15,7 +15,7 @@ namespace MyPass.Entities
         [Display(Name = "Başlık"), Required, StringLength(50)]
         public string Title { get; set; }
 
-        [Display(Name = "Açıklama"), DataType(DataType.MultilineText), Column(TypeName = "varchar")]
+        [Display(Name = "Notlar"), DataType(DataType.MultilineText), Column(TypeName = "varchar")]
         public string Nodes { get; set; }
 
         [Display(Name = "URL"), Column(TypeName = "varchar")]
