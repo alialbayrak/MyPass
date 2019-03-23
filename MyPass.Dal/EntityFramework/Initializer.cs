@@ -19,7 +19,7 @@ namespace MyPass.Dal.EntityFramework
                 Name = "admin",
                 Surname = "admin",
                 Email = "admin@email.com",
-                Password = "MTIzNDU2", //123456
+                Password = "0FFE1ABD1A08215353C233D6E009613E95EEC4253832A761AF28FF37AC5A150C", //1111
                 IsActive = true,
                 Status = true,
             };

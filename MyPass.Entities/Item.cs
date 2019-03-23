@@ -21,7 +21,7 @@ namespace MyPass.Entities
         [Display(Name = "URL"), Column(TypeName = "varchar")]
         public string Url { get; set; }
 
-        [Display(Name = "URL"), Column(TypeName = "varchar"), StringLength(50)]
+        [Display(Name = "Kullanıcı Adı"), Column(TypeName = "varchar"), StringLength(50)]
         public string Username { get; set; }
 
         [Display(Name = "Şifre"), Required, Column(TypeName = "varchar"), StringLength(100)]
