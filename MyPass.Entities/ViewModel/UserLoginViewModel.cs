@@ -9,7 +9,7 @@ namespace MyPass.Entities.ViewModel
 {
     public class UserLoginViewModel
     {
-        [Required, DataType(DataType.EmailAddress)]
+        [Required]
         public string Email { get; set; }
 
         [Required, DataType(DataType.Password)]

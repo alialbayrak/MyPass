@@ -12,19 +12,31 @@ namespace MyPass.Dal.EntityFramework
     {
         protected override void Seed(MyPassContext context)
         {
-            base.Seed(context);
 
-            User user = new User
+            User admin1 = new User
             {
-                Name = "admin",
-                Surname = "admin",
-                Email = "admin@email.com",
+                Name = "Ali",
+                Surname = "Albayrak",
+                Email = "albayrakali99@gmail.com",
                 Password = "0FFE1ABD1A08215353C233D6E009613E95EEC4253832A761AF28FF37AC5A150C", //1111
                 IsActive = true,
                 Status = true,
+                CreatedOn = DateTime.Now
             };
 
-            context.Users.Add(user);
+            User admin2 = new User
+            {
+                Name = "Mehmet",
+                Surname = "Küçük",
+                Email = "mehmet.kucuk.93@gmail.com",
+                Password = "0FFE1ABD1A08215353C233D6E009613E95EEC4253832A761AF28FF37AC5A150C", //1111
+                IsActive = true,
+                Status = true,
+                CreatedOn = DateTime.Now
+            };
+
+            context.Users.Add(admin1);
+            context.Users.Add(admin2);
             context.SaveChanges();
             
         }

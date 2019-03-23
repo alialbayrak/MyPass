@@ -39,7 +39,6 @@ namespace MyPass.Bll
         public User Login(string email, string password)
         {
             string passwordHash = SecurityHelper.GenerateSHA256String(password);
-
             User user = userRepository.Get(m => m.Email == email && m.Password == passwordHash).FirstOrDefault();
             if (user != null)
             {
