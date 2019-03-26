@@ -52,6 +52,7 @@
     <Compile Include="ViewModel\CategoryDetailViewModel.cs" />
     <Compile Include="ViewModel\GroupEditViewModel.cs" />
     <Compile Include="ViewModel\GroupUserViewModel.cs" />
+    <Compile Include="ViewModel\HomeDashboardViewModel.cs" />
     <Compile Include="ViewModel\NewPasswordViewModel.cs" />
     <Compile Include="ViewModel\UserLoginViewModel.cs" />
   </ItemGroup>
