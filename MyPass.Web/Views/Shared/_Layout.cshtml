@@ -4,10 +4,10 @@
 @{
     User user = SessionHelper.GetCurrentUser();
 
-    List<Category> groupList = null;
+    List<Category> categoryList = null;
     if (user != null)
     {
-        groupList = SessionHelper.GetCategoriesByUserId(user.Id);
+        categoryList = SessionHelper.GetCategoriesByUserId(user.Id);
     }
 
 }
@@ -83,29 +83,29 @@
                 <div>
                     <a class="mypass-sidebar-menu d-flex" href="@Url.Action("List","Category")">
                         <div><i class="fa fa-archive"></i></div>
-                        <div class="flex-grow-1 ml-4"><b>Gruplar</b></div>
+                        <div class="flex-grow-1 ml-4"><b>Kategoriler</b></div>
                     </a>
                 </div>
-                @if (groupList != null)
+                @if (categoryList != null)
                 {
 
                     <div id="group-list" class="col-md-3 col-lg-2 col-8 d-md-block d-none p-0 position-fixed" style="bottom: 10px;">
                         <div class="mypass-sidebar-item d-flex border-bottom-0">
                             <div><i class="fa fa-file-archive-o"></i></div>
-                            <div class="flex-grow-1 ml-2"><b>Grup Listesi</b></div>
+                            <div class="flex-grow-1 ml-2"><b>Kategori Listesi</b></div>
                         </div>
-                        @foreach (var group in groupList)
+                        @foreach (var category in categoryList)
                         {
 
                             <div>
-                                <a class="pl-4 pr-5 pt-1 pb-1 mypass-sidebar-item border-top-0 d-flex text-white align-items-center" href="@Url.Action("Detail","Category", new { id=group.Id })">
+                                <a class="pl-4 pr-5 pt-1 pb-1 mypass-sidebar-item border-top-0 d-flex text-white align-items-center" href="@Url.Action("Detail","Category", new { id=category.Id })">
                                     <div><i class="fa fa-hashtag"></i></div>
-                                    @if (group.Title != null && group.Title.Length > 15)
+                                    @if (category.Title != null && category.Title.Length > 15)
                                     {
-                                        group.Title = group.Title.Substring(0, 15) + "...";
+                                        category.Title = category.Title.Substring(0, 15) + "...";
                                     }
-                                    <div class="flex-grow-1 ml-3 mr-1">@group.Title</div>
-                                    <span class="badge badge-light badge-pi ll">@group.ItemList.Count</span>
+                                    <div class="flex-grow-1 ml-3 mr-1">@category.Title</div>
+                                    <span class="badge badge-light badge-pi ll">@category.ItemList.Count</span>
                                 </a>
                             </div>
                         }

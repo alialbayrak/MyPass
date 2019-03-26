@@ -1,7 +1,7 @@
 ﻿@model MyPass.Entities.ViewModel.GroupEditViewModel
 
 @{
-    ViewBag.Title = "Grup Düzenle";
+    ViewBag.Title = "Kategori Düzenle";
 }
 <div class="container">
     <div class="card shadow">
@@ -29,7 +29,7 @@
 
                 <div class="form-group">
 
-                    @Html.Label("Grup Sahibi")
+                    @Html.Label("Kategori Sahibi")
                     <div>
                         @Model.GroupOwnerName
                     </div>
@@ -42,7 +42,7 @@
                     <div class="row">
                         <div class="col-md-12 d-flex" style="align-items:flex-end">
                             <div class="flex-grow-1">
-                                @Html.Label("Grubu Paylaş")
+                                @Html.Label("Kategoriyi Paylaş")
                                 @Html.TextBox("UserEmail", "", new { @class = "form-control", placeholder = "E-Posta Adresi" })
                             </div>
                             <div>
