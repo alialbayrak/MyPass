@@ -158,7 +158,7 @@ namespace MyPass.Web.Controllers
 
         public ActionResult NewPassword(string id) //encoded Id
         {
-            if (String.IsNullOrEmpty(id))
+            if (String.IsNullOrEmpty(id)) // *** String.IsNullOrWhiteSpace *** şifresi space ile kontrol edilmeli 
                 throw new HttpException(404, "");
 
             return View(new NewPasswordViewModel() { Id = id });

@@ -15,6 +15,7 @@ namespace MyPass.Entities
 
         [Display(Name = "Eklenme Tarihi"), Required, DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public DateTime CreatedOn { get; set; }
+        // public DateTime CreatedOn { get; set; } = DateTime.Now;
 
         [Display(Name = "Güncellenme Tarihi"), DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public DateTime? ModifiedOn { get; set; }
