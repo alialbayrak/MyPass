@@ -478,7 +478,6 @@
     <Content Include="Content\lib\respond.js\respond.js" />
     <Content Include="Content\lib\respond.js\respond.min.js" />
     <Content Include="Content\style.css" />
-    <Content Include="Content\template.css" />
     <Content Include="Content\template.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
@@ -507,7 +506,6 @@
     <Content Include="fonts\OpenSans-Bold.ttf" />
     <Content Include="fonts\OpenSans-Regular.ttf" />
     <Content Include="fonts\OpenSans-Semibold.ttf" />
-    <Content Include="Content\style.css.map" />
     <Content Include="Scripts\MyPassCommon.js" />
     <Content Include="Images\affordable-pricing.png" />
     <Content Include="Images\analytics.png" />
