@@ -6,6 +6,9 @@ Giriş Bilgileri:
 kullanıcı adı: albayrakali99@gmail.com <br>
 şifre: 1111 <br>
 
+login olduktan sonra veritabanı ve kullanıcısı otomatik oluşturulacaktır.
+sql server kurulu olmalıdır!
+
 Anasayfa: <br>
 ![1](https://user-images.githubusercontent.com/46328862/168491764-7b826115-1fcf-47c6-9d24-effdd833a254.png)
 
