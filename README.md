@@ -3,7 +3,7 @@
 Kategori ve altlarına şifreler ekleyebilirsiniz. Bu kategorileri başka arkadaşlarınızla paylaşabilir, şifrelerinizi ortak yönetebilirsiniz.
 
 Giriş Bilgileri:
-kullanıcı adı: albayrakali99@gmail.com <br>
+kullanıcı adı: admin@gmail.com <br>
 şifre: 1111 <br>
 
 login olduktan sonra veritabanı ve kullanıcısı otomatik oluşturulacaktır.
